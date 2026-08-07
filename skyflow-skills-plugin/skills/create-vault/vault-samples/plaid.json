@@ -1,0 +1,2891 @@
+{
+    "schemas": [
+        {
+            "name": "accounts",
+            "parentSchemaProperties": null,
+            "fields": [
+                {
+                    "name": "skyflow_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "PLAIN_TEXT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "ALL_OP"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "Skyflow ID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "account_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "account_id"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                }
+            ],
+            "childrenSchemas": [],
+            "schemaTags": [
+                {
+                    "name": "skyflow.options.description",
+                    "values": [
+                        "Scratch Table is a minimal table in a vault."
+                    ]
+                },
+                {
+                    "name": "skyflow.options.display_name",
+                    "values": [
+                        "ScratchTable"
+                    ]
+                }
+            ],
+            "properties": null
+        },
+        {
+            "name": "numbers_ach",
+            "parentSchemaProperties": null,
+            "fields": [
+                {
+                    "name": "skyflow_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "PLAIN_TEXT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "ALL_OP"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "Skyflow ID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "account",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "account"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "account_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "account_id"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "routing",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "routing"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "wire_routing",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "wire_routing"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                }
+            ],
+            "childrenSchemas": [],
+            "schemaTags": [],
+            "properties": null
+        },
+        {
+            "name": "liabilities_mortgage",
+            "parentSchemaProperties": null,
+            "fields": [
+                {
+                    "name": "skyflow_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "PLAIN_TEXT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "ALL_OP"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "Skyflow ID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "account_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "account_id"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "account_number",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "account_number"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                }
+            ],
+            "childrenSchemas": [],
+            "schemaTags": [],
+            "properties": null
+        },
+        {
+            "name": "liabilities_student",
+            "parentSchemaProperties": null,
+            "fields": [
+                {
+                    "name": "skyflow_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "PLAIN_TEXT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "ALL_OP"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "Skyflow ID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "account_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "account_id"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "account_number",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "account_number"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                }
+            ],
+            "childrenSchemas": [],
+            "schemaTags": [],
+            "properties": null
+        },
+        {
+            "name": "holdings",
+            "parentSchemaProperties": null,
+            "fields": [
+                {
+                    "name": "skyflow_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "PLAIN_TEXT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "ALL_OP"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "Skyflow ID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "account_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "account_id"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "cost_basis",
+                    "datatype": "DT_FLOAT32",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "32-bit floating point number"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "cost_basis"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "institution_price",
+                    "datatype": "DT_FLOAT32",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "32-bit floating point number"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "institution_price"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "institution_value",
+                    "datatype": "DT_FLOAT32",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "32-bit floating point number"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "institution_value"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "iso_currency_code",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "iso_currency_code"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "quantity",
+                    "datatype": "DT_FLOAT32",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "32-bit floating point number"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "quantity"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "security_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "security_id"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "unofficial_currency_code",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "unofficial_currency_code"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "institution_price_as_of",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.date"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "date"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "institution_price_as_of"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                }
+            ],
+            "childrenSchemas": [],
+            "schemaTags": [],
+            "properties": null
+        },
+        {
+            "name": "liabilities_aprs",
+            "parentSchemaProperties": null,
+            "fields": [
+                {
+                    "name": "skyflow_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "PLAIN_TEXT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "ALL_OP"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "Skyflow ID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "apr_percentage",
+                    "datatype": "DT_FLOAT32",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "32-bit floating point number"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "apr_percentage"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "apr_type",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "apr_type"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "balance_subject_to_apr",
+                    "datatype": "DT_FLOAT32",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "32-bit floating point number"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "balance_subject_to_apr"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "interest_charge_amount",
+                    "datatype": "DT_FLOAT32",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "32-bit floating point number"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "interest_charge_amount"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "account_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "account_id"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                }
+            ],
+            "childrenSchemas": [],
+            "schemaTags": [],
+            "properties": null
+        },
+        {
+            "name": "balances",
+            "parentSchemaProperties": null,
+            "fields": [
+                {
+                    "name": "skyflow_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "PLAIN_TEXT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "ALL_OP"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "Skyflow ID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "account_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "account_id"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "available",
+                    "datatype": "DT_FLOAT32",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "32-bit floating point number"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "available"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "current_balance",
+                    "datatype": "DT_FLOAT32",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "32-bit floating point number"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "current"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                }
+            ],
+            "childrenSchemas": [],
+            "schemaTags": [],
+            "properties": null
+        },
+        {
+            "name": "owners_email",
+            "parentSchemaProperties": null,
+            "fields": [
+                {
+                    "name": "skyflow_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "PLAIN_TEXT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "ALL_OP"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "Skyflow ID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "account_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "account_id"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "data",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "data"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "is_primary",
+                    "datatype": "DT_BOOL",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Boolean"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "is_primary"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "type",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "type"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                }
+            ],
+            "childrenSchemas": [],
+            "schemaTags": [],
+            "properties": null
+        },
+        {
+            "name": "owners_names",
+            "parentSchemaProperties": null,
+            "fields": [
+                {
+                    "name": "skyflow_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "PLAIN_TEXT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "ALL_OP"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "Skyflow ID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "name",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "name"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "account_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "account_id"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                }
+            ],
+            "childrenSchemas": [],
+            "schemaTags": [],
+            "properties": null
+        },
+        {
+            "name": "owners_phone_numbers",
+            "parentSchemaProperties": null,
+            "fields": [
+                {
+                    "name": "skyflow_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "PLAIN_TEXT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "ALL_OP"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "Skyflow ID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "account_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "account_id"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "data",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "data"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "type",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                            {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "type"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "is_primary",
+                    "datatype": "DT_BOOL",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Boolean"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "is_primary"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                }
+            ],
+            "childrenSchemas": [],
+            "schemaTags": [],
+            "properties": null
+        },
+        {
+            "name": "owners_addresses",
+            "parentSchemaProperties": null,
+            "fields": [
+                {
+                    "name": "skyflow_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "PLAIN_TEXT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "ALL_OP"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "Skyflow ID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "account_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "PLAIN_TEXT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "account_id"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "city",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "city"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "is_primary",
+                    "datatype": "DT_BOOL",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Boolean"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "is_primary"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                }
+            ],
+            "childrenSchemas": [],
+            "schemaTags": [],
+            "properties": null
+        },
+        {
+            "name": "users",
+            "parentSchemaProperties": null,
+            "fields": [
+                {
+                    "name": "skyflow_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "PLAIN_TEXT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "ALL_OP"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "Skyflow ID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "email",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "email"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "first_name",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "first_name"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "last_name",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "last_name"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "middle_name",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "middle_name"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "phone_number",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "phone_number"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "ssn",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "ssn"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "asset_report_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "asset_report_id"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                }
+            ],
+            "childrenSchemas": [],
+            "schemaTags": [],
+            "properties": null
+        },
+        {
+            "name": "transactions",
+            "parentSchemaProperties": null,
+            "fields": [
+                {
+                    "name": "skyflow_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "PLAIN_TEXT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "ALL_OP"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "Skyflow ID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "account_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "account_id"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "amount",
+                    "datatype": "DT_FLOAT32",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "32-bit floating point number"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "amount"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "transacted_on",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "date"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "name",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "name"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "merchant_name",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "merchant_name"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                }
+            ],
+            "childrenSchemas": [],
+            "schemaTags": [],
+            "properties": null
+        },
+        {
+            "name": "credentials",
+            "parentSchemaProperties": null,
+            "fields": [
+                {
+                    "name": "skyflow_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "PLAIN_TEXT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "ALL_OP"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "Skyflow ID"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "client_id",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "client_id"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                },
+                {
+                    "name": "secret",
+                    "datatype": "DT_STRING",
+                    "isArray": false,
+                    "tags": [
+                        {
+                            "name": "skyflow.options.default_dlp_policy",
+                            "values": [
+                                "REDACT"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "EXACT_MATCH"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.default_token_policy",
+                            "values": [
+                                "DETERMINISTIC_UUID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "String"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "secret"
+                            ]
+                        }
+                    ],
+                    "properties": null,
+                    "index": 0
+                }
+            ],
+            "childrenSchemas": [],
+            "schemaTags": [],
+            "properties": null
+        }
+    ],
+    "tags": [
+        {
+            "name": "skyflow.options.template_description",
+            "values": [
+                "The Plaid vault stores data for Plaid customer accounts, assets and other entities."
+            ]
+        },
+        {
+            "name": "skyflow.options.vault_main_object",
+            "values": [
+                "Plaid"
+            ]
+        },
+        {
+            "name": "skyflow.options.query_interface",
+            "values": [
+                "REST",
+                "SQL"
+            ]
+        },
+        {
+            "name": "skyflow.options.env_name",
+            "values": [
+                "ALL_ENV"
+            ]
+        },
+        {
+            "name": "skyflow.options.display_name",
+            "values": [
+                "Plaid"
+            ]
+        }
+    ]
+}

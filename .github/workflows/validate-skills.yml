@@ -1,0 +1,28 @@
+name: Validate skills
+
+# Lightweight check: every skill under skyflow-skills-plugin/skills/ must have a
+# valid SKILL.md before it can be merged or packaged. No artifacts are produced.
+
+on:
+  pull_request:
+    paths:
+      - "skyflow-skills-plugin/skills/**"
+      - ".github/scripts/validate-skills.py"
+      - ".github/workflows/validate-skills.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Install dependencies
+        run: pip install pyyaml
+      - name: Validate skill frontmatter
+        run: python3 .github/scripts/validate-skills.py

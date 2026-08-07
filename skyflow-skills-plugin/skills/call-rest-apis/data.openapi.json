@@ -1,0 +1,3004 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Data API",
+    "description": "This API inserts, retrieves, and otherwise manages data in a vault.\n\nThe Data API is available from two base URIs. *identifier* is the identifier in your vault's URL.<ul><li><b>Sandbox:</b> https://*identifier*.vault.skyflowapis-preview.com</li><li><b>Production:</b> https://*identifier*.vault.skyflowapis.com</li></ul>\n\nWhen you make an API call, you need to add a header: <table><tr><th>Header</th><th>Value</th><th>Example</th></tr><tr><td>Authorization</td><td>A Bearer Token. See <a href='/api-authentication/'>API Authentication</a>.</td><td><code>Authorization: Bearer eyJhbGciOiJSUzI...1NiIsJdfPA</code></td></tr></table>",
+    "license": {
+      "name": "Proprietary",
+      "url": "https://docs.skyflow.com"
+    },
+    "version": "2026.04"
+  },
+  "servers": [
+    {
+      "url": "https://{identifier}.vault.skyflowapis.com",
+      "description": "Production",
+      "variables": {
+        "identifier": {
+          "default": "{{vault_uri}}",
+          "description": "The unique identifier for the vault."
+        }
+      }
+    },
+    {
+      "url": "https://{identifier}.vault.skyflowapis-preview.com",
+      "description": "Sandbox",
+      "variables": {
+        "identifier": {
+          "default": "{{vault_uri}}",
+          "description": "The unique identifier for the vault."
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "description": "Guides, tutorials, and references for using Skyflow.",
+    "url": "https://docs.skyflow.com/"
+  },
+  "paths": {
+    "/v1/audit/events": {
+      "get": {
+        "tags": [
+          "Audit"
+        ],
+        "summary": "List Data Audit Events",
+        "description": "Lists data audit events that match query parameters.",
+        "operationId": "list_data_audit_events",
+        "parameters": [
+          {
+            "name": "filterOps.context.changeID",
+            "in": "query",
+            "description": "ID for the audit event. Use this to uniquely identify a specific audit record.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterOps.context.requestID",
+            "in": "query",
+            "description": "ID for the request that caused the event. Use to correlate multiple audit events triggered by a single API request.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterOps.context.sessionID",
+            "in": "query",
+            "description": "ID for the session in which the request was sent. Present when a session context is available.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterOps.context.actor",
+            "in": "query",
+            "description": "Member who sent the request. Depending on `actorType`, this may be a user ID or a service account ID. For users this is their email address.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterOps.context.actorType",
+            "in": "query",
+            "description": "Type of member who sent the request.",
+            "schema": {
+              "enum": [
+                "NONE",
+                "USER",
+                "GROUP",
+                "SERVICE_ACCOUNT",
+                "SQL_SERVICE_ACCOUNT"
+              ],
+              "type": "string",
+              "format": "enum"
+            }
+          },
+          {
+            "name": "filterOps.context.accessType",
+            "in": "query",
+            "description": "Type of access for the request.",
+            "schema": {
+              "enum": [
+                "ACCESS_NONE",
+                "API",
+                "SQL",
+                "OKTA_LOGIN"
+              ],
+              "type": "string",
+              "format": "enum"
+            }
+          },
+          {
+            "name": "filterOps.context.ipAddress",
+            "in": "query",
+            "description": "IP Address of the client that made the request.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterOps.context.origin",
+            "in": "query",
+            "description": "HTTP Origin request header (including scheme, hostname, and port) of the request. Present only for browser-originated requests. Absent for server-to-server API calls.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterOps.context.authMode",
+            "in": "query",
+            "description": "Authentication mode the `actor` used. `OKTA_JWT`: Federated identity via Okta SSO. `SERVICE_ACCOUNT_JWT`: Service account JWT (machine-to-machine). `PAT_JWT`: Personal Access Token issued as a JWT. `API_KEY`: Static API key.",
+            "schema": {
+              "enum": [
+                "AUTH_NONE",
+                "OKTA_JWT",
+                "SERVICE_ACCOUNT_JWT",
+                "PAT_JWT",
+                "API_KEY",
+                "STS"
+              ],
+              "type": "string",
+              "format": "enum"
+            }
+          },
+          {
+            "name": "filterOps.context.jwtID",
+            "in": "query",
+            "description": "ID of the JWT token (the `jti` claim). Identifies the specific token used for this request.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterOps.context.bearerTokenContextID",
+            "in": "query",
+            "description": "User context embedded in the bearer token. Present when a bearer token encodes additional user context.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterOps.parentAccountID",
+            "in": "query",
+            "description": "Resources with the specified parent account ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterOps.accountID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "filterOps.workspaceID",
+            "in": "query",
+            "description": "Resources with the specified workspace ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterOps.vaultID",
+            "in": "query",
+            "description": "Resources with the specified vault ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterOps.resourceIDs",
+            "in": "query",
+            "description": "Resources with a specified ID. If a resource matches at least one ID, the associated event is returned. Format is a comma-separated list of \"\\<resourceType\\>/\\<resourceID\\>\". For example, \"VAULT/12345, USER/67890\".",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-external-query-parameters": [
+          "filterOps.accountID",
+          "filterOps.context.actor",
+          "filterOps.context.actorType",
+          "filterOps.context.accessType",
+          "filterOps.context.authMode",
+          "filterOps.context.bearerTokenContextID",
+          "filterOps.context.changeID",
+          "filterOps.context.ipAddress",
+          "filterOps.context.jwtID",
+          "filterOps.context.origin",
+          "filterOps.context.requestID",
+          "filterOps.context.sessionID",
+          "filterOps.parentAccountID",
+          "filterOps.resourceIDs",
+          "filterOps.workspaceID",
+          "filterOps.vaultID"
+        ],
+        "x-required-query-parameters": [
+          "filterOps.accountID"
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      }
+    },
+    "/v1/vaults/{vaultID}": {
+      "post": {
+        "tags": [
+          "Records"
+        ],
+        "summary": "Batch Operation",
+        "description": "Performs multiple record operations in a single transaction.",
+        "operationId": "batch_operation",
+        "parameters": [
+          {
+            "name": "vaultID",
+            "in": "path",
+            "description": "ID of the vault.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchOperationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchOperationResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      }
+    },
+    "/v1/vaults/{vaultID}/detokenize": {
+      "post": {
+        "tags": [
+          "Tokens"
+        ],
+        "summary": "Detokenize",
+        "description": "Returns records that correspond to the specified tokens.",
+        "operationId": "detokenize",
+        "parameters": [
+          {
+            "name": "vaultID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetokenizePayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetokenizeResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      }
+    },
+    "/v1/vaults/{vaultID}/query": {
+      "post": {
+        "tags": [
+          "Query"
+        ],
+        "summary": "Execute Query",
+        "description": "Returns records for a valid SQL query. This endpoint <ul><li>Can return redacted record values.</li><li>Supports only the <code>SELECT</code> command.</li><li>Returns a maximum of 25 records. To return additional records, perform another query using the <code>OFFSET</code> keyword.</li><li>Can't modify the vault or perform transactions.</li><li>Can't return tokens.</li><li>Can't return file download or render URLs.</li><li>Doesn't support the <code>WHERE</code> keyword with columns using transient tokenization.</li><li>Doesn't support `?` conditional for columns with column-level encryption disabled.</li><ul>",
+        "operationId": "execute_query",
+        "parameters": [
+          {
+            "name": "vaultID",
+            "in": "path",
+            "description": "ID of the vault.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetQueryResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      }
+    },
+    "/v1/vaults/{vaultID}/tokenize": {
+      "post": {
+        "tags": [
+          "Tokens"
+        ],
+        "summary": "Tokenize",
+        "description": "Returns tokens that correspond to the specified records. Only applicable for fields with deterministic tokenization.<br /><br /><b>Note:</b> This endpoint doesn't insert records—it returns tokens for existing values. To insert records and return tokens for that new record's values, see Insert Records' `tokenization` parameter.",
+        "operationId": "tokenize",
+        "parameters": [
+          {
+            "name": "vaultID",
+            "in": "path",
+            "description": "ID of the vault.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenizePayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenizeResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      }
+    },
+    "/v1/vaults/{vaultID}/{objectName}": {
+      "get": {
+        "tags": [
+          "Records"
+        ],
+        "summary": "Get Records",
+        "description": "Returns the specified records from a table.",
+        "operationId": "get_records",
+        "parameters": [
+          {
+            "name": "vaultID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "objectName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skyflow_ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "redaction",
+            "in": "query",
+            "schema": {
+              "enum": [
+                "DEFAULT",
+                "REDACTED",
+                "MASKED",
+                "PLAIN_TEXT"
+              ],
+              "type": "string",
+              "format": "enum"
+            }
+          },
+          {
+            "name": "tokenization",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "downloadURL",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "column_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "column_values",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ASCENDING",
+                "DESCENDING",
+                "NONE"
+              ],
+              "type": "string",
+              "format": "enum"
+            }
+          },
+          {
+            "name": "returnFileMetadata",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkGetRecordResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-external-query-parameters": [
+          "skyflow_ids",
+          "redaction",
+          "tokenization",
+          "returnFileMetadata",
+          "fields",
+          "offset",
+          "limit",
+          "downloadURL",
+          "column_name",
+          "column_values",
+          "order_by"
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Records"
+        ],
+        "summary": "Insert Records",
+        "description": "Inserts a record in the specified table.<br /><br />The time-to-live (TTL) for a transient field begins when the field value is set during record insertion.<br /><br />Columns that have a string data type and a uniqueness constraint accept strings up to 2500 characters. If an inserted string exceeds 2500 characters, the call returns a token insertion error.",
+        "operationId": "insert_records",
+        "parameters": [
+          {
+            "name": "vaultID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "objectName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InsertRecordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InsertRecordResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Records"
+        ],
+        "summary": "Delete Records",
+        "description": "Deletes the specified records from a table.",
+        "operationId": "delete_records",
+        "parameters": [
+          {
+            "name": "vaultID",
+            "in": "path",
+            "description": "ID of the vault.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "objectName",
+            "in": "path",
+            "description": "Name of the table.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkDeleteRecordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkDeleteRecordResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      }
+    },
+    "/v1/vaults/{vaultID}/{objectName}/{ID}": {
+      "get": {
+        "tags": [
+          "Records"
+        ],
+        "summary": "Get Record By ID",
+        "description": "Returns the specified record from a table.",
+        "operationId": "get_record_by_id",
+        "parameters": [
+          {
+            "name": "vaultID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "objectName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "redaction",
+            "in": "query",
+            "schema": {
+              "enum": [
+                "DEFAULT",
+                "REDACTED",
+                "MASKED",
+                "PLAIN_TEXT"
+              ],
+              "type": "string",
+              "format": "enum"
+            }
+          },
+          {
+            "name": "tokenization",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "downloadURL",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "returnFileMetadata",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetFieldRecords"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-external-query-parameters": [
+          "redaction",
+          "tokenization",
+          "returnFileMetadata",
+          "downloadURL",
+          "fields"
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      },
+      "put": {
+        "tags": [
+          "Records"
+        ],
+        "summary": "Update Record",
+        "description": "Updates the specified record in a table.<br /><br />When you update a field, include the entire contents you want the field to store. For JSON fields, include all nested fields and values. If a nested field isn't included, it's removed.<br /><br />The time-to-live (TTL) for a transient field resets when the field value is updated.",
+        "operationId": "update_record",
+        "parameters": [
+          {
+            "name": "vaultID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "objectName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRecordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateRecordResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Records"
+        ],
+        "summary": "Delete Record",
+        "description": "Deletes the specified record from a table.<br /><br /><b>Note:</b> This method doesn't delete transient field tokens. Transient field values are available until they expire based on the fields' time-to-live (TTL) setting.",
+        "operationId": "delete_record",
+        "parameters": [
+          {
+            "name": "vaultID",
+            "in": "path",
+            "description": "ID of the vault.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "objectName",
+            "in": "path",
+            "description": "Name of the table.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ID",
+            "in": "path",
+            "description": "`skyflow_id` of the record to delete.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteRecordResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      }
+    },
+    "/v1/vaults/{vaultID}/{objectName}/{ID}/files": {
+      "post": {
+        "tags": [
+          "Files"
+        ],
+        "summary": "Upload File",
+        "description": "Uploads a file to the specified record.",
+        "operationId": "upload_file",
+        "parameters": [
+          {
+            "name": "vaultID",
+            "in": "path",
+            "description": "ID of the vault.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "objectName",
+            "in": "path",
+            "description": "Name of the table.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ID",
+            "in": "path",
+            "description": "`skyflow_id` of the record.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fileColumnName": {
+                    "type": "string",
+                    "description": "The key for `fileColumnName` is the name of the column to store the file in, which must have a `file` data type. The value is the file to upload.",
+                    "format": "binary"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateRecordResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      }
+    },
+    "/v1/vaults/{vaultID}/{tableName}/{ID}/files/{columnName}": {
+      "delete": {
+        "tags": [
+          "Files"
+        ],
+        "summary": "Delete File",
+        "description": "Deletes a file from a specified record.",
+        "operationId": "delete_file",
+        "parameters": [
+          {
+            "name": "vaultID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteFileResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      }
+    },
+    "/v1/vaults/{vaultID}/{tableName}/{ID}/files/{columnName}/scan-status": {
+      "get": {
+        "tags": [
+          "Files"
+        ],
+        "summary": "Get File Scan Status",
+        "description": "Returns the anti-virus scan status of a file.",
+        "operationId": "get_file_scan_status",
+        "parameters": [
+          {
+            "name": "vaultID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetFileScanStatusResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      }
+    },
+    "/v2/vaults/{vaultID}/files/upload": {
+      "post": {
+        "tags": [
+          "Files"
+        ],
+        "summary": "Upload File",
+        "description": "Uploads a file to a new or specified record.",
+        "operationId": "upload_file_v2",
+        "parameters": [
+          {
+            "name": "vaultID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadFileRequestV2"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadFileResponseV2"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      }
+    },
+    "/v2/vaults/{vaultID}/files/uploadStatus": {
+      "post": {
+        "tags": [
+          "Files"
+        ],
+        "summary": "Get Files Upload Status",
+        "description": "Returns the upload and scan status for the specified file columns across multiple records.",
+        "operationId": "get_files_upload_status",
+        "parameters": [
+          {
+            "name": "vaultID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetFilesUploadStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetFilesUploadStatusResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "$ref": "#/components/headers/x-request-id"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "x-fern-audiences": [
+          "external"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AuditAfterOptions": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Timestamp provided in the previous audit response's `nextOps` attribute. An alternate way to manage response pagination. Can't be used with `sortOps` or `offset`. For the first request in a series of audit requests, leave blank."
+          },
+          "changeID": {
+            "type": "string",
+            "description": "Change ID provided in the previous audit response's `nextOps` attribute. An alternate way to manage response pagination. Can't be used with `sortOps` or `offset`. For the first request in a series of audit requests, leave blank."
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "AuditEvent_Context": {
+        "required": [
+          "changeID",
+          "requestID",
+          "traceID",
+          "actor",
+          "actorType",
+          "accessType",
+          "ipAddress",
+          "authMode",
+          "jwtID"
+        ],
+        "type": "object",
+        "properties": {
+          "changeID": {
+            "type": "string",
+            "description": "ID for the audit event. Use this to uniquely identify a specific audit record."
+          },
+          "requestID": {
+            "type": "string",
+            "description": "ID for the request that caused the event. Use to correlate multiple audit events triggered by a single API request."
+          },
+          "traceID": {
+            "type": "string",
+            "description": "ID for the request set by the service that received the request. Use with your distributed tracing tool to follow a request across Skyflow services."
+          },
+          "sessionID": {
+            "deprecated": true,
+            "type": "string",
+            "description": "ID for the session in which the request was sent. Present when a session context is available."
+          },
+          "actor": {
+            "type": "string",
+            "description": "Member who sent the request. Depending on `actorType`, this may be a user ID or a service account ID. For users this is their email address."
+          },
+          "actorType": {
+            "enum": [
+              "USER",
+              "SERVICE_ACCOUNT"
+            ],
+            "type": "string",
+            "description": "Type of member who sent the request.",
+            "format": "enum"
+          },
+          "accessType": {
+            "enum": [
+              "API",
+              "SQL"
+            ],
+            "type": "string",
+            "description": "Type of access for the request.",
+            "format": "enum"
+          },
+          "ipAddress": {
+            "type": "string",
+            "description": "IP Address of the client that made the request."
+          },
+          "origin": {
+            "type": "string",
+            "description": "HTTP Origin request header (including scheme, hostname, and port) of the request. Present only for browser-originated requests. Absent for server-to-server API calls."
+          },
+          "authMode": {
+            "enum": [
+              "OKTA_JWT",
+              "SERVICE_ACCOUNT_JWT",
+              "PAT_JWT",
+              "API_KEY",
+              "STS"
+            ],
+            "type": "string",
+            "description": "Authentication mode the `actor` used. `OKTA_JWT`: Federated identity via Okta SSO. `SERVICE_ACCOUNT_JWT`: Service account JWT (machine-to-machine). `PAT_JWT`: Personal Access Token issued as a JWT. `API_KEY`: Static API key.",
+            "format": "enum"
+          },
+          "jwtID": {
+            "type": "string",
+            "description": "ID of the JWT token (the `jti` claim). Identifies the specific token used for this request."
+          },
+          "bearerTokenContextID": {
+            "type": "string",
+            "description": "User context embedded in the bearer token. Present when a bearer token encodes additional user context."
+          },
+          "keyID": {
+            "type": "string",
+            "description": "Key ID of the API key used to make the request. Present when `authMode` is `SERVICE_ACCOUNT_JWT` or `API_KEY`. Absent for `PAT_JWT` and `OKTA_JWT`."
+          },
+          "subject": {
+            "type": "string",
+            "description": "This represents the user on whose behalf the request is made. It may differ from the actor (act) when delegation is involved."
+          }
+        },
+        "description": "Context for an audit event.",
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "AuditEvent_Data": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The entire body of the request or response."
+          }
+        },
+        "description": "Data (if any).",
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "AuditEvent_NestedResponse": {
+        "required": [
+          "code",
+          "message",
+          "identifier"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Status code for the operation.",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "Status message for the operation. Describes the failure reason for errored items. Empty string on success."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "ID for the resource that was modified, in `{resourceType}/{resourceID}` format. For example, `VAULT/cd1d815aa09b4cbfbb803bd20349f202`. May be empty if the item identifier couldn't be resolved."
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AuditEvent_Data"
+              }
+            ],
+            "description": "Data (if any) for the response."
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "AuditEvent_Response": {
+        "required": [
+          "code",
+          "message",
+          "timestamp"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Status code for the overall operation. For batch operations, a 200 doesn't mean every item succeeded. Check `nestedResponse` for per-operation outcomes.",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "Status message for the overall operation."
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AuditEvent_Data"
+              }
+            ],
+            "description": "Data (if any) for the response."
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "Time when the response was created. RFC 3339 format with nanosecond precision."
+          },
+          "nestedResponse": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuditEvent_NestedResponse"
+            },
+            "description": "Details for nested operations, if any. An array of per-item results returned for batch operations. Absent for non-batch operations."
+          }
+        },
+        "description": "Response properties of the event.",
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "AuditResponse": {
+        "example": {
+          "event": [
+            {
+              "accountID": "f244fg04bgh876qemk6c3a32256e2k90",
+              "context": {
+                "accessType": "API",
+                "actor": "web31628f5a74bf7994459921c67eef8",
+                "actorType": "USER",
+                "authMode": "PAT_JWT",
+                "bearerTokenContextID": "bcf4b254-a415-4b3f-a8b9-0a1f02e52e18",
+                "changeID": "a13de9af-3331-4bee-b45c-95031d4c5b5d",
+                "ipAddress": "27.116.16.50",
+                "jwtID": "o82d1d5bcbf148eb890a937593321ff8",
+                "keyID": "y72c0826fb1146b3bb8a0d48ab4d0653",
+                "origin": "https://area51-beta.skyflow.dev",
+                "requestID": "5a682b12-1a44-922b-a487-ab108f018cc4",
+                "sessionID": "cb598f8c-786e-48da-898d-830ec92417b7",
+                "traceID": "9f1707bd-3da0-4946-bf7a-ca99e7e12e5b"
+              },
+              "parentAccountID": "b894gg34fbn866eabd6c2ce1457r4b45",
+              "request": {
+                "actionType": "READ",
+                "apiName": "/v1.QueryService/ExecuteQuery",
+                "data": {
+                  "content": "select * from persons where skyflow_id=\"5b6c8110-58b3-4aa0-8b36-d2cfd5c7b259\""
+                },
+                "httpInfo": {
+                  "URI": "/v1/vaults/cd1d815aa09b4cbfbb803bd20349f202/query",
+                  "method": "POST"
+                },
+                "resourceType": "RECORD",
+                "tags": [
+                  "dml"
+                ],
+                "timestamp": "2023-06-27 14:01:14.264739714",
+                "vaultID": "cd1d815aa09b4cbfbb803bd20349f202",
+                "workspaceID": "e01054d5ff3411eab9f2360c405de1ab"
+              },
+              "resourceIDs": [
+                "ACCOUNT/f244fg04bgh876qemk6c3a32256e2k90",
+                "TABLE/persons",
+                "VAULT/cd1d815aa09b4cbfbb803bd20349f202"
+              ],
+              "response": {
+                "code": 200,
+                "data": null,
+                "message": "success",
+                "timestamp": "2023-06-27 14:01:14.271659365"
+              }
+            }
+          ],
+          "nextOps": {
+            "changeID": "a13de9af-3331-4bee-b45c-95031d4c5b5d",
+            "timestamp": "2023-06-27 14:01:14.264739714"
+          }
+        },
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuditResponseEvent"
+            },
+            "description": "Events matching the query."
+          },
+          "nextOps": {
+            "$ref": "#/components/schemas/AuditAfterOptions"
+          }
+        }
+      },
+      "AuditResponseEvent": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/AuditEvent_Context"
+          },
+          "response": {
+            "$ref": "#/components/schemas/AuditEvent_Response"
+          }
+        },
+        "description": "Audit event details."
+      },
+      "BatchOperationRequest": {
+        "example": {
+          "records": [
+            {
+              "batchID": "persons-12345",
+              "downloadURL": false,
+              "fields": {
+                "drivers_license_number": "89867453",
+                "name": "Connor",
+                "phone_number": "8794523160",
+                "ssn": "143-89-2306"
+              },
+              "method": "POST",
+              "redaction": "PLAIN_TEXT",
+              "tableName": "persons",
+              "tokenization": false,
+              "upsert": "drivers_license_number"
+            },
+            {
+              "ID": "f1dbc55c-7c9b-495d-9a36-72bb2b619202",
+              "batchID": "persons-12345",
+              "downloadURL": true,
+              "method": "GET",
+              "redaction": "PLAIN_TEXT",
+              "tableName": "persons",
+              "tokenization": false
+            }
+          ]
+        },
+        "required": [
+          "records"
+        ],
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BatchRecord"
+            },
+            "description": "Record operations to perform."
+          },
+          "continueOnError": {
+            "type": "boolean",
+            "default": false,
+            "description": "If `true`, continues processing remaining operations when one operation returns an error. If `false`, stops processing remaining operations when one operation returns an error."
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "BatchOperationResponse": {
+        "example": {
+          "responses": [
+            {
+              "records": [
+                {
+                  "fields": {
+                    "drivers_license_number": "*REDACTED*",
+                    "id_proof": "https://<aws-url>/f244fg04bgh876qemk6c3a32256e2k90/record_file/cd1d815aa09b4cbfbb803bd20349f202/c2d1debe468923c08f32470a9dh789f9/f1dbc55c-7c9b-495d-9a36-72bb2b619202/8fa99367cf58h5w296eaf15d6f42a4d237cbab65?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=<aws-credential>&X-Amz-Date=20230622T100910Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=<aws-signature>",
+                    "name": "B***ok",
+                    "phone_number": "XXXXXX7533",
+                    "skyflow_id": "f1dbc55c-7c9b-495d-9a36-72bb2b619202",
+                    "ssn": "XXX-XX-7645"
+                  },
+                  "skyflow_id": "4bc4a3a6-dfba-4314-809d-5ca63d43c732"
+                }
+              ]
+            }
+          ],
+          "vaultID": "cd1d815aa09b4cbfbb803bd20349f202"
+        },
+        "type": "object",
+        "properties": {
+          "vaultID": {
+            "type": "string",
+            "description": "ID of the vault."
+          },
+          "responses": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Responses in the same order as in the request. Responses have the same payload structure as their corresponding APIs: <br/><ul><li>`POST` returns an Insert Records response.</li><li>`PUT` returns an Update Record response.</li><li>`GET` returns a Get Record response.</li><li>`DELETE` returns a Delete Record response.</li></ul>"
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "BatchRecord": {
+        "required": [
+          "tableName",
+          "fields",
+          "method"
+        ],
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Field and value key pairs. For example, `{'field_1':'value_1', 'field_2':'value_2'}`. Only valid when `method` is `POST` or `PUT`."
+          },
+          "tableName": {
+            "type": "string",
+            "description": "Name of the table to perform the operation on."
+          },
+          "method": {
+            "enum": [
+              "POST",
+              "PUT",
+              "GET",
+              "DELETE"
+            ],
+            "type": "string",
+            "description": "Method of the operation.",
+            "format": "enum"
+          },
+          "batchID": {
+            "type": "string",
+            "description": "ID to group operations by. Operations in the same group are executed sequentially."
+          },
+          "redaction": {
+            "enum": [
+              "DEFAULT",
+              "REDACTED",
+              "MASKED",
+              "PLAIN_TEXT"
+            ],
+            "type": "string",
+            "default": "DEFAULT",
+            "description": "Redaction level to enforce for the returned record. Subject to policies assigned to the API caller.",
+            "format": "enum"
+          },
+          "tokenization": {
+            "type": "boolean",
+            "default": false,
+            "description": "If `true`, this operation returns tokens for fields with tokenization enabled. Only applicable if `skyflow_id` values are specified."
+          },
+          "ID": {
+            "type": "string",
+            "description": "`skyflow_id` for the record. Only valid when `method` is `GET`, `DELETE`, or `PUT`."
+          },
+          "downloadURL": {
+            "type": "boolean",
+            "default": false,
+            "description": "If `true`, returns download URLs for fields with a file data type. URLs are valid for 15 minutes. If virus scanning is enabled, only returns if the file is clean."
+          },
+          "upsert": {
+            "type": "string",
+            "description": "Column that stores primary keys for upsert operations. The column must be marked as unique in the vault schema. Only valid when `method` is `POST`."
+          },
+          "tokens": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Fields and tokens for the record. For example, `{'field_1':'token_1', 'field_2':'token_2'}`."
+          },
+          "returnFileMetadata": {
+            "type": "boolean",
+            "default": false,
+            "description": "If `true`, returns metadata for files."
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "BulkDeleteRecordRequest": {
+        "example": {
+          "skyflow_ids": [
+            "51782ea4-91a5-4430-a06d-f4b76efd3d2f",
+            "110ce08f-6059-4874-b1ae-7c6651d286ff"
+          ]
+        },
+        "type": "object",
+        "properties": {
+          "skyflow_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "`skyflow_id` values of the records to delete. If `*` is specified, this operation deletes all records in the table."
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "BulkDeleteRecordResponse": {
+        "example": {
+          "RecordIDResponse": [
+            "51782ea4-91a5-4430-a06d-f4b76efd3d2f",
+            "110ce08f-6059-4874-b1ae-7c6651d286ff"
+          ]
+        },
+        "type": "object",
+        "properties": {
+          "RecordIDResponse": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "IDs for the deleted records, or `*` if all records were deleted."
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "BulkGetRecordResponse": {
+        "example": {
+          "records": [
+            {
+              "fields": {
+                "Estimated Value": 10000,
+                "Expected Close Date": "2017-07-12",
+                "Opportunity Name": "BPS Pilot",
+                "Owner": {
+                  "email": "kat+collab15@skyflow.com",
+                  "id": "usrijG9SC4EQlq5cm",
+                  "name": "Jess Patel"
+                },
+                "Priority": "Medium",
+                "Proposal Deadline": "2017-06-14",
+                "Status": "Qualification"
+              }
+            },
+            {
+              "fields": {
+                "Estimated Value": 24791,
+                "Expected Close Date": "2017-07-07",
+                "Opportunity Name": "BPS second use case",
+                "Owner": {
+                  "email": "kat+collab36@skyflow.com",
+                  "id": "usrGqHsNLhH41Q91M",
+                  "name": "Sandy Hagen"
+                },
+                "Priority": "Very Low Deprioritize",
+                "Status": "Proposal"
+              }
+            }
+          ]
+        },
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetFieldRecords"
+            },
+            "description": "The specified records."
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "DeleteFileResponse": {
+        "example": {
+          "deleted": true,
+          "skyflow_id": "4423ccdf-75eb-4e2e-abfc-acb43b1440cd"
+        },
+        "type": "object",
+        "properties": {
+          "skyflow_id": {
+            "type": "string",
+            "description": "ID of the record."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "If `true`, the file was deleted."
+          }
+        }
+      },
+      "DeleteRecordResponse": {
+        "example": {
+          "deleted": true,
+          "skyflow_id": "4423ccdf-75eb-4e2e-abfc-acb43b1440cd"
+        },
+        "type": "object",
+        "properties": {
+          "skyflow_id": {
+            "type": "string",
+            "description": "ID of the deleted record."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "If `true`, the record was deleted."
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "DetokenizePayload": {
+        "example": {
+          "detokenizationParameters": [
+            {
+              "redaction": "PLAIN_TEXT",
+              "token": "afbd1074-51c1-4a16-9eee-e2c0ecb52125"
+            },
+            {
+              "redaction": "DEFAULT",
+              "token": "05383487-fcae-42e5-a48e-5bd62a51af12"
+            }
+          ],
+          "downloadURL": false
+        },
+        "required": [
+          "detokenizationParameters"
+        ],
+        "type": "object",
+        "properties": {
+          "detokenizationParameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetokenizeRecordRequest"
+            },
+            "description": "Detokenization details."
+          },
+          "downloadURL": {
+            "type": "boolean",
+            "default": false,
+            "description": "If `true`, returns download URLs for fields with a file data type. URLs are valid for 15 minutes. If virus scanning is enabled, only returns if the file is clean."
+          },
+          "continueOnError": {
+            "type": "boolean",
+            "default": false,
+            "description": "If `true`, the detokenization request continues even if an error occurs."
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "DetokenizeRecordRequest": {
+        "required": [
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "Token that identifies the record to detokenize."
+          },
+          "redaction": {
+            "enum": [
+              "DEFAULT",
+              "REDACTED",
+              "MASKED",
+              "PLAIN_TEXT"
+            ],
+            "type": "string",
+            "default": "DEFAULT",
+            "description": "Redaction level to enforce for the returned record. Subject to policies assigned to the API caller.",
+            "format": "enum"
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "DetokenizeRecordResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "Token of the record."
+          },
+          "valueType": {
+            "enum": [
+              "STRING",
+              "INTEGER",
+              "FLOAT",
+              "BOOL",
+              "DATETIME",
+              "JSON",
+              "ARRAY",
+              "DATE",
+              "TIME"
+            ],
+            "type": "string",
+            "description": "Data type of the `value`.",
+            "format": "enum"
+          },
+          "value": {
+            "type": "string",
+            "description": "Data corresponding to the token."
+          },
+          "error": {
+            "type": "string",
+            "description": "Error if token isn't found."
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "DetokenizeResponse": {
+        "example": {
+          "records": [
+            {
+              "token": "afbd1074-51c1-4a16-9eee-e2c0ecb52125",
+              "value": "Robin",
+              "valueType": "STRING"
+            },
+            {
+              "token": "05383487-fcae-42e5-a48e-5bd62a51af12",
+              "value": "*REDACTED*",
+              "valueType": "STRING"
+            }
+          ]
+        },
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetokenizeRecordResponse"
+            },
+            "description": "Records corresponding to the specified tokens."
+          }
+        }
+      },
+      "FieldRecords": {
+        "example": {
+          "fields": {
+            "id_proof": "https://<aws-url>/f244fg04bgh876qemk6c3a32256e2k90/record_file/cd1d815aa09b4cbfbb803bd20349f202/c2d1debe468923c08f32470a9dh789f9/f1dbc55c-7c9b-495d-9a36-72bb2b619202/8fa99367cf58h5w296eaf15d6f42a4d237cbab65?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=<aws-credential>&X-Amz-Date=20230622T100910Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=<aws-signature>",
+            "name": "Brook",
+            "ssn": "167-45-7645"
+          }
+        },
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Fields and values for the record. For example, `{'field_1':'value_1', 'field_2':'value_2'}`."
+          },
+          "tokens": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Fields and tokens for the record. For example, `{'field_1':'token_1', 'field_2':'token_2'}`."
+          }
+        },
+        "description": "Record values and tokens.",
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "FileMetadata": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string",
+            "description": "Name of the file, including the extension if provided."
+          },
+          "fileSizeKB": {
+            "type": "integer",
+            "description": "Size of the file in kilobytes (KB), rounded up from bytes to the nearest KB.",
+            "format": "uint32"
+          },
+          "fileType": {
+            "type": "string",
+            "description": "Type of the file, detected based on its content (MIME type)."
+          }
+        },
+        "description": "Metadata about the file, including its name, size, and type.",
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "FileUploadStatusRecord": {
+        "required": [
+          "tableName",
+          "skyflowID",
+          "fileFields"
+        ],
+        "type": "object",
+        "properties": {
+          "tableName": {
+            "type": "string",
+            "description": "Name of the table to perform the operation on."
+          },
+          "skyflowID": {
+            "type": "string",
+            "description": "`skyflow_id` of the record."
+          },
+          "fileFields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of column names for the file upload status."
+          }
+        },
+        "additionalProperties": false
+      },
+      "FileUploadStatusResponseRecord": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "object",
+            "description": "Fields containing skyflow_id and per-column file scan status."
+          },
+          "tableName": {
+            "type": "string",
+            "description": "Name of the table."
+          }
+        }
+      },
+      "GetFieldRecords": {
+        "example": {
+          "fields": {
+            "id_proof": "https://<aws-url>/f244fg04bgh876qemk6c3a32256e2k90/record_file/cd1d815aa09b4cbfbb803bd20349f202/c2d1debe468923c08f32470a9dh789f9/f1dbc55c-7c9b-495d-9a36-72bb2b619202/8fa99367cf58h5w296eaf15d6f42a4d237cbab65?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=<aws-credential>&X-Amz-Date=20230622T100910Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=<aws-signature>",
+            "name": "Brook",
+            "ssn": "167-45-7645"
+          }
+        },
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Fields and values for the record. For example, `{'field_1':'value_1', 'field_2':'value_2'}`."
+          },
+          "tokens": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Fields and tokens for the record. For example, `{'field_1':'token_1', 'field_2':'token_2'}`."
+          },
+          "fileMetadata": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/FileMetadata"
+            },
+            "description": "Metadata for the uploaded file, keyed by dynamic column name."
+          }
+        },
+        "description": "Record values and tokens for Get and BulkGet.",
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "GetFileScanStatusResponse": {
+        "example": {
+          "av_scan_status": "SCAN-CLEAN"
+        },
+        "type": "object",
+        "properties": {
+          "file_status": {
+            "enum": [],
+            "type": "string",
+            "description": "Status of the file.",
+            "format": "enum"
+          },
+          "av_scan_status": {
+            "enum": [
+              "SCAN_CLEAN",
+              "SCAN_INFECTED",
+              "SCAN_DELETED",
+              "SCAN_ERROR",
+              "SCAN_PENDING",
+              "SCAN_UNSCANNABLE",
+              "SCAN_FILE_NOT_FOUND",
+              "SCAN_INVALID"
+            ],
+            "type": "string",
+            "description": "Anti-virus scan status of the file.",
+            "format": "enum"
+          }
+        }
+      },
+      "GetFilesUploadStatusRequest": {
+        "required": [
+          "records"
+        ],
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FileUploadStatusRecord"
+            },
+            "description": "Array of record objects corresponding to the specified files."
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetFilesUploadStatusResponse": {
+        "example": {
+          "records": [
+            {
+              "fields": {
+                "skyflow_id": "2a62a1fd-0399-4338-bf05-e2877c6a7bd3",
+                "passport": {
+                  "file_status": "UPLOADED",
+                  "av_scan_status": "",
+                  "mimetype_status": ""
+                }
+              },
+              "tableName": "onboarding"
+            }
+          ]
+        },
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FileUploadStatusResponseRecord"
+            },
+            "description": "Array of record objects with file scan status for the specified files."
+          }
+        }
+      },
+      "GetQueryRequest": {
+        "example": {
+          "query": "select * from opportunities where id=\"01010000ade21cded569d43944544ec6\""
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The SQL query to execute.<br><br><b>Supported commands:</b> <ul> <li><code>SELECT</code></li> </ul> <b>Supported operators:</b> <ul> <li><code>&gt;</code></li> <li><code>&lt;</code></li> <li><code>=</code></li> <li><code>AND</code></li> <li><code>OR</code></li> <li><code>NOT</code></li> <li><code>LIKE</code></li> <li><code>ILIKE</code></li> <li><code>NULL</code></li> <li><code>NOT NULL</code></li> </ul> <b>Supported keywords:</b> <ul> <li><code>FROM</code></li> <li><code>JOIN</code></li> <li><code>INNER JOIN</code></li> <li><code>LEFT OUTER JOIN</code></li> <li><code>LEFT JOIN</code></li> <li><code>RIGHT OUTER JOIN</code></li> <li><code>RIGHT JOIN</code></li> <li><code>FULL OUTER JOIN</code></li> <li><code>FULL JOIN</code></li> <li><code>OFFSET</code></li> <li><code>LIMIT</code></li> <li><code>WHERE</code></li> </ul> <b>Supported functions:</b> <ul> <li><code>AVG()</code></li> <li><code>SUM()</code></li> <li><code>COUNT()</code></li> <li><code>MIN()</code></li> <li><code>MAX()</code></li> <li><code>REDACTION()</code></li> </ul>"
+          }
+        }
+      },
+      "GetQueryResponse": {
+        "example": {
+          "records": [
+            {
+              "fields": {
+                "Estimated Value": 10000,
+                "Expected Close Date": "2017-07-12",
+                "Opportunity Name": "BPS Pilot",
+                "Owner": {
+                  "email": "kat+collab15@skyflow.com",
+                  "id": "usrijG9SC4EQlq5cm",
+                  "name": "Jess Patel"
+                },
+                "Priority": "Medium",
+                "Proposal Deadline": "2017-06-14",
+                "Status": "Qualification"
+              }
+            },
+            {
+              "fields": {
+                "Estimated Value": 24791,
+                "Expected Close Date": "2017-07-07",
+                "Opportunity Name": "BPS second use case",
+                "Owner": {
+                  "email": "kat+collab36@skyflow.com",
+                  "id": "usrGqHsNLhH41Q91M",
+                  "name": "Sandy Hagen"
+                },
+                "Priority": "Very Low Deprioritize",
+                "Status": "Proposal"
+              }
+            }
+          ]
+        },
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldRecords"
+            },
+            "description": "Records returned by the query."
+          }
+        }
+      },
+      "InsertRecordRequest": {
+        "example": {
+          "homogeneous": false,
+          "records": [
+            {
+              "fields": {
+                "drivers_license_number": "13456789",
+                "name": "John",
+                "phone_number": "1236784563",
+                "ssn": "123-45-6789"
+              }
+            },
+            {
+              "fields": {
+                "drivers_license_number": "98765432",
+                "name": "James",
+                "phone_number": "9876543215",
+                "ssn": "345-45-9876"
+              }
+            }
+          ],
+          "tokenization": true,
+          "upsert": "drivers_license_number"
+        },
+        "required": [
+          "records"
+        ],
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldRecords"
+            },
+            "description": "Record values and tokens."
+          },
+          "tokenization": {
+            "type": "boolean",
+            "default": false,
+            "description": "If `true`, this operation returns tokens for fields with tokenization enabled."
+          },
+          "upsert": {
+            "type": "string",
+            "description": "Name of a unique column in the table. Uses upsert operations to check if a record exists based on the unique column's value. If a matching record exists, the record updates with the values you provide. If a matching record doesn't exist, the upsert operation inserts a new record.<br /><br />When you upsert a field, include the entire contents you want the field to store. For JSON fields, include all nested fields and values. If a nested field isn't included, it's removed."
+          },
+          "homogeneous": {
+            "type": "boolean",
+            "default": false,
+            "description": "If `true`, this operation mandates that all the records have the same fields. This parameter does not work with upsert."
+          },
+          "byot": {
+            "enum": [
+              "DISABLE",
+              "ENABLE",
+              "ENABLE_STRICT"
+            ],
+            "type": "string",
+            "default": "DISABLE",
+            "description": "Token insertion behavior.",
+            "format": "enum"
+          }
+        }
+      },
+      "InsertRecordResponse": {
+        "example": {
+          "records": [
+            {
+              "skyflow_id": "9322ffcc-fb8b-4fbe-8551-55c80559007c",
+              "tokens": {
+                "drivers_license_number": "358a03eb-2592-4037-be31-046032471d44",
+                "name": "16c5aa3e-fc49-4a87-8891-5a40c6c2f880",
+                "phone_number": "015ef018-adf3-49a0-8590-dbe9746de044",
+                "ssn": "341-11-6689"
+              }
+            },
+            {
+              "skyflow_id": "51782ea4-91a5-4430-a06d-f4b76efd3d2f",
+              "tokens": {
+                "drivers_license_number": "f7d9a190-899c-40bf-b719-9e856afb6995",
+                "name": "071a3ae2-62eb-4b63-bcca-17a4da96fc87",
+                "phone_number": "a2fba7f3-d5e5-4e40-ab44-bce2c0ba1493",
+                "ssn": "522-41-0947"
+              }
+            }
+          ]
+        },
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecordMetaProperties"
+            },
+            "description": "Inserted records."
+          }
+        }
+      },
+      "RecordMetaProperties": {
+        "type": "object",
+        "properties": {
+          "skyflow_id": {
+            "type": "string",
+            "description": "ID of the inserted record."
+          },
+          "tokens": {
+            "type": "object",
+            "description": "Tokens for the record."
+          }
+        }
+      },
+      "TokenizePayload": {
+        "required": [
+          "tokenizationParameters"
+        ],
+        "type": "object",
+        "properties": {
+          "tokenizationParameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TokenizeRecordRequest"
+            },
+            "description": "Tokenization details."
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "TokenizeRecordRequest": {
+        "example": {
+          "columnGroup": "persons_cg",
+          "value": "26/02/2001"
+        },
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Existing value to return a token for. Must be specified with either `columnGroup` or both `table` and `column`."
+          },
+          "table": {
+            "type": "string",
+            "description": "Name of the table that the value belongs to. Must be specified with `column`. Can't be specified with `columnGroup`."
+          },
+          "column": {
+            "type": "string",
+            "description": "Name of the column that the value belongs to. Must be specified with `table`. Can't be specified with `columnGroup`."
+          },
+          "columnGroup": {
+            "type": "string",
+            "description": "Name of the column group that the value belongs to. Can't be specified with `table` or `column`."
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "TokenizeRecordResponse": {
+        "required": [
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "Token corresponding to a value."
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "TokenizeResponse": {
+        "example": {
+          "records": [
+            {
+              "token": "04/75/6955"
+            }
+          ]
+        },
+        "required": [
+          "records"
+        ],
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TokenizeRecordResponse"
+            },
+            "description": "Tokens corresponding to the specified values."
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "UpdateRecordRequest": {
+        "example": {
+          "record": {
+            "fields": {
+              "drivers_license_number": "89867453",
+              "name": "Steve Smith",
+              "phone_number": "8794523160",
+              "ssn": "143-89-2306"
+            }
+          },
+          "tokenization": true
+        },
+        "type": "object",
+        "properties": {
+          "record": {
+            "$ref": "#/components/schemas/FieldRecords"
+          },
+          "tokenization": {
+            "type": "boolean",
+            "default": false,
+            "description": "If `true`, this operation returns tokens for fields with tokenization enabled."
+          },
+          "byot": {
+            "enum": [
+              "DISABLE",
+              "ENABLE",
+              "ENABLE_STRICT"
+            ],
+            "type": "string",
+            "default": "DISABLE",
+            "description": "Token insertion behavior.",
+            "format": "enum"
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "UpdateRecordResponse": {
+        "example": {
+          "skyflow_id": "4423ccdf-75eb-4e2e-abfc-acb43b1440cd",
+          "tokens": {
+            "drivers_license_number": "2fd8e729-228a-43cf-8274-d0d0efe47f6c",
+            "name": "f5c268b7-5dd4-4d37-a12d-05d148a8a440",
+            "phone_number": "4639c565-85c8-4120-94a6-e0e91ffaeca4",
+            "ssn": "736-96-1306"
+          }
+        },
+        "type": "object",
+        "properties": {
+          "skyflow_id": {
+            "type": "string",
+            "description": "ID of the updated record."
+          },
+          "tokens": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Tokens for the record."
+          }
+        },
+        "x-visibility": [
+          "external"
+        ]
+      },
+      "UploadFileRequestV2": {
+        "required": [
+          "tableName",
+          "columnName",
+          "file"
+        ],
+        "type": "object",
+        "properties": {
+          "tableName": {
+            "type": "string",
+            "description": "Name of the table."
+          },
+          "columnName": {
+            "type": "string",
+            "description": "Name of the column that contains the file."
+          },
+          "skyflowID": {
+            "type": "string",
+            "description": "ID of the record to update."
+          },
+          "file": {
+            "type": "string",
+            "description": "Path of the file to upload. Each request only supports one file."
+          },
+          "returnFileMetadata": {
+            "type": "boolean",
+            "default": false,
+            "description": "If `true`, returns metadata about the uploaded file."
+          }
+        },
+        "additionalProperties": false
+      },
+      "UploadFileResponseV2": {
+        "example": {
+          "skyflowID": "4423ccdf-75eb-4e2e-abfc-acb43b1440cd",
+          "fileMetadata": {
+            "fileName": "kyc.jpeg",
+            "fileSize": 1024,
+            "fileType": "application/jpeg"
+          }
+        },
+        "type": "object",
+        "properties": {
+          "skyflowID": {
+            "type": "string",
+            "description": "ID of the record to update."
+          },
+          "fileMetadata": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/FileMetadata"
+            },
+            "description": "Metadata for the uploaded file with keys based on the name of the column containing the file."
+          }
+        }
+      },
+      "http_code": {
+        "description": "HTTP status codes. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Status.",
+        "x-visibility": [
+          "external"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "minimum": 100,
+        "maximum": 599
+      },
+      "error_response": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "grpc_code",
+              "http_code",
+              "http_status",
+              "message"
+            ],
+            "properties": {
+              "grpc_code": {
+                "description": "gRPC status codes. See https://grpc.io/docs/guides/status-codes.",
+                "type": "integer",
+                "format": "int32",
+                "minimum": 0,
+                "maximum": 16
+              },
+              "http_code": {
+                "$ref": "#/components/schemas/http_code"
+              },
+              "http_status": {
+                "type": "string",
+                "maxLength": 100
+              },
+              "message": {
+                "type": "string",
+                "maxLength": 1000
+              },
+              "details": {
+                "type": "array",
+                "maxItems": 25,
+                "items": {
+                  "x-visibility": [
+                    "external"
+                  ],
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Access token, prefixed by `Bearer `.",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "headers": {
+      "x-request-id": {
+        "description": "Unique identifier for the request.",
+        "schema": {
+          "type": "string",
+          "minLength": 36,
+          "maxLength": 36
+        },
+        "example": "d4410ea0-1d83-473c-a09a-24c6b03096d4"
+      }
+    },
+    "examples": {
+      "400_response": {
+        "value": {
+          "error": {
+            "grpc_code": 3,
+            "http_code": 400,
+            "http_status": "Bad Request",
+            "message": "The request was invalid or cannot be served. Check the request parameters and try again.",
+            "details": []
+          }
+        }
+      },
+      "401_response": {
+        "value": {
+          "error": {
+            "grpc_code": 16,
+            "http_code": 401,
+            "http_status": "Unauthorized",
+            "message": "The request is unauthorized. Make sure you have a valid access token.",
+            "details": []
+          }
+        }
+      },
+      "404_response": {
+        "value": {
+          "error": {
+            "grpc_code": 5,
+            "http_code": 404,
+            "http_status": "Not Found",
+            "message": "The requested resource wasn't found.",
+            "details": []
+          }
+        }
+      },
+      "500_response": {
+        "value": {
+          "error": {
+            "grpc_code": 13,
+            "http_code": 500,
+            "http_status": "Internal Server Error",
+            "message": "Skyflow services experienced an internal error. Contact Skyflow support with request ID d4410ea0-1d83-473c-a09a-24c6b03096d4 for more information.",
+            "details": []
+          }
+        }
+      }
+    },
+    "responses": {
+      "400": {
+        "description": "Returned when the request is invalid or cannot be served.",
+        "headers": {
+          "X-Request-ID": {
+            "$ref": "#/components/headers/x-request-id"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error_response"
+            },
+            "examples": {
+              "Bad request": {
+                "$ref": "#/components/examples/400_response"
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Returned when the request is unauthorized.",
+        "headers": {
+          "X-Request-ID": {
+            "$ref": "#/components/headers/x-request-id"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error_response"
+            },
+            "examples": {
+              "Unauthorized": {
+                "$ref": "#/components/examples/401_response"
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Returned when a resource doesn't exist.",
+        "headers": {
+          "X-Request-ID": {
+            "$ref": "#/components/headers/x-request-id"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error_response"
+            },
+            "examples": {
+              "Not found": {
+                "$ref": "#/components/examples/404_response"
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "An unexpected error response.",
+        "headers": {
+          "X-Request-ID": {
+            "$ref": "#/components/headers/x-request-id"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error_response"
+            },
+            "examples": {
+              "Internal server error": {
+                "$ref": "#/components/examples/500_response"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,257 @@
+{
+  "schemas": [
+    {
+      "name": "card_details",
+      "fields": [
+        {
+          "name": "skyflow_id",
+          "datatype": "DT_STRING",
+          "tags": [
+            {
+              "name": "skyflow.options.default_dlp_policy",
+              "values": ["PLAIN_TEXT"]
+            },
+            { "name": "skyflow.options.operation", "values": ["ALL_OP"] },
+            { "name": "skyflow.options.sensitivity", "values": ["LOW"] },
+            {
+              "name": "skyflow.options.data_type",
+              "values": ["skyflow.SkyflowID"]
+            },
+            {
+              "name": "skyflow.options.description",
+              "values": ["Skyflow defined Primary Key"]
+            },
+            { "name": "skyflow.options.display_name", "values": ["Skyflow ID"] }
+          ]
+        },
+        {
+          "name": "name_on_card",
+          "datatype": "DT_STRING",
+          "tags": [
+            {
+              "name": "skyflow.options.default_dlp_policy",
+              "values": ["REDACT"]
+            },
+            {
+              "name": "skyflow.validation.regular_exp",
+              "values": ["^([a-zA-Z]+|([a-zA-Z ]+[a-zA-Z]))$"]
+            },
+            {
+              "name": "skyflow.options.identifiability",
+              "values": ["MODERATE_IDENTIFIABILITY"]
+            },
+            { "name": "skyflow.options.operation", "values": ["ALL_OP"] },
+            {
+              "name": "skyflow.options.default_token_policy",
+              "values": ["DETERMINISTIC_UUID"]
+            },
+            {
+              "name": "skyflow.options.configuration_tags",
+              "values": ["NULLABLE"]
+            },
+            {
+              "name": "skyflow.options.personal_information_type",
+              "values": ["PII", "PHI"]
+            },
+            {
+              "name": "skyflow.options.privacy_law",
+              "values": ["GDPR", "CCPA", "HIPAA"]
+            },
+            {
+              "name": "skyflow.options.description",
+              "values": ["An individual's first, middle, or last name"]
+            },
+            {
+              "name": "skyflow.options.display_name",
+              "values": ["Name on Card"]
+            }
+          ]
+        },
+        {
+          "name": "card_number",
+          "datatype": "DT_STRING",
+          "tags": [
+            {
+              "name": "skyflow.options.default_dlp_policy",
+              "values": ["REDACT"]
+            },
+            {
+              "name": "skyflow.options.identifiability",
+              "values": ["HIGH_IDENTIFIABILITY"]
+            },
+            { "name": "skyflow.options.operation", "values": ["ALL_OP"] },
+            {
+              "name": "skyflow.options.default_token_policy",
+              "values": ["DETERMINISTIC_UUID"]
+            },
+            {
+              "name": "skyflow.options.personal_information_type",
+              "values": ["PII", "PHI", "NPI"]
+            },
+            {
+              "name": "skyflow.options.privacy_law",
+              "values": ["GDPR", "CCPA", "HIPAA"]
+            },
+            {
+              "name": "skyflow.options.data_type",
+              "values": ["skyflow.CardNumber"]
+            },
+            {
+              "name": "skyflow.options.description",
+              "values": ["Credit or debit card number"]
+            },
+            {
+              "name": "skyflow.options.display_name",
+              "values": ["Card Number"]
+            }
+          ]
+        },
+        {
+          "name": "expiry_month",
+          "datatype": "DT_STRING",
+          "tags": [
+            {
+              "name": "skyflow.options.default_dlp_policy",
+              "values": ["REDACT"]
+            },
+            {
+              "name": "skyflow.validation.regular_exp",
+              "values": ["^(0[1-9]|1[0-2])$"]
+            },
+            { "name": "skyflow.options.operation", "values": ["ALL_OP"] },
+            {
+              "name": "skyflow.options.default_token_policy",
+              "values": ["DETERMINISTIC_UUID"]
+            },
+            {
+              "name": "skyflow.options.description",
+              "values": ["Expiration month of a credit/debit card"]
+            },
+            {
+              "name": "skyflow.options.display_name",
+              "values": ["Expiry Month"]
+            }
+          ]
+        },
+        {
+          "name": "expiry_year",
+          "datatype": "DT_STRING",
+          "tags": [
+            {
+              "name": "skyflow.options.default_dlp_policy",
+              "values": ["REDACT"]
+            },
+            {
+              "name": "skyflow.validation.regular_exp",
+              "values": ["^(202[2-9])|(20[3-6][0-9])|(207[0-2])$"]
+            },
+            { "name": "skyflow.options.operation", "values": ["ALL_OP"] },
+            {
+              "name": "skyflow.options.default_token_policy",
+              "values": ["DETERMINISTIC_UUID"]
+            },
+            {
+              "name": "skyflow.options.description",
+              "values": ["Expiration year of a credit/debit card"]
+            },
+            {
+              "name": "skyflow.options.display_name",
+              "values": ["Expiry Year"]
+            }
+          ]
+        },
+        {
+          "name": "cvv",
+          "datatype": "DT_STRING",
+          "tags": [
+            {
+              "name": "skyflow.options.default_dlp_policy",
+              "values": ["REDACT"]
+            },
+            {
+              "name": "skyflow.validation.regular_exp",
+              "values": ["^[0-9]{3,4}$"]
+            },
+            { "name": "skyflow.options.operation", "values": ["EXACT_MATCH"] },
+            {
+              "name": "skyflow.options.default_token_policy",
+              "values": ["NON_DETERMINISTIC_TRANSIENT_UUID"]
+            },
+            {
+              "name": "skyflow.options.description",
+              "values": ["CVV or CVC of a credit/debit card"]
+            },
+            { "name": "skyflow.options.display_name", "values": ["CVV"] },
+            {
+              "name": "skyflow.options.ttl",
+              "values": ["60"]
+            },
+            {
+              "name": "skyflow.options.data_type",
+              "values": ["skyflow.CardCVV"]
+            }
+          ]
+        },
+        {
+          "name": "created_at",
+          "datatype": "DT_STRING",
+          "tags": [
+            {
+              "name": "skyflow.options.default_dlp_policy",
+              "values": ["REDACT"]
+            },
+            { "name": "skyflow.options.operation", "values": ["ALL_OP"] },
+            {
+              "name": "skyflow.options.default_token_policy",
+              "values": ["DETERMINISTIC_UUID"]
+            },
+            {
+              "name": "skyflow.options.description",
+              "values": ["Timestamp of when a payment was made"]
+            },
+            {
+              "name": "skyflow.options.display_name",
+              "values": ["Created at"]
+            }
+          ]
+        }
+      ],
+      "childrenSchemas": [],
+      "schemaTags": [
+        { "name": "skyflow.options.display_name", "values": ["Card Details"] },
+        {
+          "name": "skyflow.options.description",
+          "values": [
+            "Card Details object stores attributes related to a credit card."
+          ]
+        }
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "skyflow.options.experimental",
+      "values": ["true"]
+    },
+    {
+      "name": "skyflow.options.template_description",
+      "values": ["This vault is used for Payments Acceptance Sample App."]
+    },
+    {
+      "name": "skyflow.options.vault_main_object",
+      "values": ["PaymentsAcceptanceSample"]
+    },
+    {
+      "name": "skyflow.options.query_interface",
+      "values": ["REST", "SQL"]
+    },
+    {
+      "name": "skyflow.options.env_name",
+      "values": ["ALL_ENV"]
+    },
+    {
+      "name": "skyflow.options.display_name",
+      "values": ["PaymentsAcceptanceSample"]
+    }
+  ]
+}

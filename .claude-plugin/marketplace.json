@@ -1,0 +1,14 @@
+{
+  "name": "skyflow-skills-marketplace",
+  "owner": {
+    "name": "Skyflow"
+  },
+  "description": "Skyflow skills for Claude Code — skills only, no MCP servers.",
+  "plugins": [
+    {
+      "name": "skyflow-skills",
+      "source": "./skyflow-skills-plugin",
+      "description": "Skyflow skills for Claude Code: getting started, vault creation, REST API guidance, SDK migration, implementation planning, and SDK quickstarts."
+    }
+  ]
+}

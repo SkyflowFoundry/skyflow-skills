@@ -1,0 +1,98 @@
+{
+    "schemas": [
+        {
+            "name": "table1",
+            "fields": [
+                {
+                    "name": "skyflow_id",
+                    "datatype": "DT_STRING",
+                    "tags": [
+                        {
+                            "name": "skyflow.options.data_type",
+                            "values": [
+                                "skyflow.SkyflowID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.sensitivity",
+                            "values": [
+                                "LOW"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.display_name",
+                            "values": [
+                                "Skyflow ID"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.description",
+                            "values": [
+                                "Skyflow defined Primary Key"
+                            ]
+                        },
+                        {
+                            "name": "skyflow.options.operation",
+                            "values": [
+                                "ALL_OP"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "schemaTags": [
+                {
+                    "name": "skyflow.options.description",
+                    "values": [
+                        "Scratch Table is a minimal table in a vault."
+                    ]
+                },
+                {
+                    "name": "skyflow.options.display_name",
+                    "values": [
+                        "ScratchTable"
+                    ]
+                }
+            ]
+        }
+    ],
+    "tags": [
+        {
+            "name": "skyflow.options.template_description",
+            "values": [
+                "Scratch Template is a minimal template to create a vault."
+            ]
+        },
+        {
+            "name": "skyflow.options.vault_main_object",
+            "values": [
+                "ScratchTemplate"
+            ]
+        },
+        {
+            "name": "skyflow.options.query_interface",
+            "values": [
+                "REST",
+                "SQL"
+            ]
+        },
+        {
+            "name": "skyflow.options.env_name",
+            "values": [
+                "ALL_ENV"
+            ]
+        },
+        {
+            "name": "skyflow.options.tier",
+            "values": [
+                "COMMUNITY"
+            ]
+        },
+        {
+            "name": "skyflow.options.display_name",
+            "values": [
+                "ScratchTemplate"
+            ]
+        }
+    ]
+}

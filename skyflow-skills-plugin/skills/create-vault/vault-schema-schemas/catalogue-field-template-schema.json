@@ -1,0 +1,152 @@
+{
+    "$schema": "http://json-schema.org/draft/2019-09/schema#",
+    "$id": "http://skyflow.com/schemas/json-schema/field-template-schema.json",
+    "definitions": {
+        "tag": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "name",
+                "values"
+            ]
+        },
+        "tags": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "$ref": "#/definitions/tag"
+            }
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "references": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "id": {
+            "type": "string",
+            "pattern": "^$|^[a-z][a-z0-9]{31}"
+        },
+        "field": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "datatype": {
+                    "type": "integer"
+                },
+                "isArray": {
+                    "type": "boolean"
+                },
+                "tags": {
+                    "$ref": "#/definitions/tags"
+                },
+                "properties": {
+                    "$ref": "#/definitions/properties"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "name",
+                "datatype"
+            ]
+        },
+        "fields": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "$ref": "#/definitions/field"
+            }
+        },
+        "schema": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "$ref": "#/definitions/id"
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "^[a-z][a-z0-9_]*$"
+                },
+                "parentSchemaProperties": {
+                    "type": "object",
+                    "properties": {
+                        "isArray": {
+                            "type": "boolean"
+                        },
+                        "tableType": {
+                            "type": "integer"
+                        },
+                        "parentFieldTags": {
+                            "$ref": "#/definitions/tags"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "fields": {
+                    "$ref": "#/definitions/fields"
+                },
+                "childrenSchemas": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "$ref": "#/definitions/schema"
+                    }
+                },
+                "schemaTags": {
+                    "$ref": "#/definitions/tags"
+                },
+                "properties": {
+                    "$ref": "#/definitions/properties"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "name"
+            ]
+        }
+    },
+    "type": "object",
+    "properties": {
+        "field": {
+            "$ref": "#/definitions/field"
+        },
+        "compositeField": {
+            "$ref": "#/definitions/schema"
+        }
+    },
+    "oneOf": [
+        {
+            "required": [
+                "field"
+            ]
+        },
+        {
+            "required": [
+                "compositeField"
+            ]
+        }
+    ],
+    "additionalProperties": false
+}

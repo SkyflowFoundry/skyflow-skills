@@ -1,0 +1,2776 @@
+[
+    {
+        "tagName": "skyflow.options.operation",
+        "displayName": "Encryption",
+        "displayNameV2": "Encryption",
+        "description": "Skyflow always keeps data encrypted in transit and at rest. In addition, Skyflow enables operations on encrypted data, meaning data can remain encrypted even during data processing.",
+        "descriptionV2": "Column-level encryption defines if values remain encrypted during processing and which operations are available.",
+        "canTakeMultipleValues": true,
+        "allowedOperations": {
+            "field": {
+                "withoutData": [
+                    "ADD",
+                    "UPDATE",
+                    "REMOVE"
+                ]
+            },
+            "composite": {
+                "withoutData": [
+                    "ADD",
+                    "UPDATE",
+                    "REMOVE"
+                ]
+            },
+            "compositeArray": {}
+        },
+        "valueType": "constants",
+        "values": [
+            {
+                "valueName": "EXACT_MATCH",
+                "displayName": "Exact Match",
+                "displayNameV2": "Exact Match",
+                "description": "Exact match operations will be turned on for this column. This enables queries like SELECT * FROM users WHERE email = \"johndoe@mail.com\" to run while the email column remains encrypted.",
+                "descriptionV2": "Enable queries like ‘SELECT * FROM users WHERE email = “johndoe@email.com”’.",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            },
+            {
+                "valueName": "AGGREGATION",
+                "displayName": "Aggregation",
+                "displayNameV2": "Aggregation",
+                "description": "Aggregation operations, like SUM and AVERAGE, will be turned on for this column. This enables queries like SELECT AVERAGE(age) FROM users to run while the age column remains encrypted.",
+                "descriptionV2": "Enable queries like ‘SELECT AVG(age) FROM users’.",
+                "dataTypes": [
+                    "DT_INT32"
+                ]
+            },
+            {
+                "valueName": "ORDER",
+                "displayName": "Comparison",
+                "displayNameV2": "Comparison",
+                "description": "Comparison operations will be turned on for this column. This enables queries like SELECT * FROM users WHERE age > 40 to run while the age column remains encrypted.",
+                "descriptionV2": "Enable queries like ‘SELECT * FROM users WHERE age > 40’.",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FLOAT32"
+                ]
+            },
+            {
+                "valueName": "ALL_OP",
+                "displayName": "All Operations",
+                "displayNameV2": "All Operations",
+                "description": "This column will not be encrypted at all times. It is recommended that all sensitive columns be encrypted. For non-sensitive columns, turning this option off may provide a performance boost. All operations work on columns that are not encrypted.",
+                "descriptionV2": "This column will not be encrypted at all times. It is recommended that all sensitive columns be encrypted. For non-sensitive columns, turning this option off may provide a performance boost. All operations work on columns that are not encrypted.",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_FILE_TYPE",
+                    "DT_DATE", 
+                    "DT_TIME",
+                    "DT_DATETIME"
+                ],
+                "arrayDataTypes": [
+                    "DT_STRING",
+                    "DT_EMBEDDED"
+                ]
+            }
+        ]
+    },
+    {
+        "tagName": "skyflow.options.default_token_policy",
+        "displayName": "Default Token Policy",
+        "displayNameV2": "Default Token Policy",
+        "description": "Tokenization is a privacy preservation technique where sensitive data is substituted with non-sensitive tokens. Tokens have no exploitable value and can be exchanged for the original data by privileged parties.",
+        "descriptionV2": "Tokenization substitutes sensitive values with non-sensitive tokens. Privileged parties can exchange tokens for original values.",
+        "allowedOperations": {
+            "field": {
+                "withoutData": [
+                    "ADD",
+                    "UPDATE",
+                    "DELETE"
+                ]
+            },
+            "composite": {
+                "withoutData": [
+                    "ADD",
+                    "UPDATE",
+                    "DELETE"
+                ]
+            },
+            "compositeArray": {}
+        },
+        "valueType": "constants",
+        "values": [
+            {
+                "valueName": "RANDOM_TOKEN",
+                "displayName": "Random Token",
+                "displayNameV2": "Random tokens",
+                "description": "A random token will be generated for this column by default. Random tokens are not derived from the original data. For example, a random token for johndoe@gmail.com could be bwe09ffg7d8tu8pd.",
+                "descriptionV2": "Generate a different token for every instance of a value.",
+                "version": 1,
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ],
+                "arrayDataTypes": []
+            },
+            {
+                "valueName": "FORMAT_PRESERVING_TOKEN",
+                "displayName": "Format Preserving Token",
+                "displayNameV2": "Format Preserving Token",
+                "description": "A format preserving token will be generated for this column by default using the regex specified below. For example, a format preserving token for johndoe@gmail.com could look like bwe09f@fg7d8.tu8.",
+                "descriptionV2": "A format preserving token will be generated for this column by default using the regex specified below. For example, a format preserving token for johndoe@gmail.com could look like bwe09f@fg7d8.tu8.",
+                "version": 1,
+                "dataTypes": [
+                    "DT_STRING",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ],
+                "arrayDataTypes": [],
+                "childrenTags": [
+                    {
+                        "tagName": "skyflow.options.format_preserving_regex",
+                        "displayName": "Format Preserving Regular Expression",
+                        "displayNameV2": "Format Preserving Regular Expression",
+                        "description": "format preserving regular expression",
+                        "descriptionV2": "format preserving regular expression",
+                        "allowedOperations": {
+                            "field": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "composite": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "compositeArray": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            }
+                        },
+                        "valueType": "string",
+                        "dataTypes": [
+                            "DT_STRING",
+                            "DT_ENUM",
+                            "DT_DATETIME",
+                            "DT_DATE",
+                            "DT_TIME"
+                        ],
+                        "arrayDataTypes": []
+                    }
+                ]
+            },
+            {
+                "valueName": "NON_DETERMINISTIC_UUID",
+                "displayName": "UUID Token",
+                "displayNameV2": "Random tokens",
+                "description": "A random token will be generated each time for a given value. For example, a random token for 'johndoe@gmail.com' could be 'c7db3f3a-5d01-4a98-961e-9cbdb6241b0d'. Each future occurrence of the value 'johndoe@gmail.com' will create a different random token.",
+                "descriptionV2": "Generate a different token for every instance of a value.",
+                "version": 2,
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ],
+                "arrayDataTypes": []
+            },
+            {
+                "valueName": "DETERMINISTIC_UUID",
+                "displayName": "UUID Deterministic Token",
+                "displayNameV2": "Consistent tokens",
+                "description": "A persistent UUID token will be generated for a given value. All future occurrences of this value will generate the same token. For example, the value 'johndoe@gmail.com' will always generate the token 'c7db3f3a-5d01-4a98-961e-9cbdb6241b0d' for a given vault.",
+                "descriptionV2": "Generate the same token for every instance of a value.",
+                "version": 2,
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ],
+                "arrayDataTypes": []
+            },
+            {
+                "valueName": "DETERMINISTIC_FPT",
+                "displayName": "Format Preserving Deterministic Token",
+                "displayNameV2": "Format Preserving Deterministic Token",
+                "description": "A persistent, format preserving token will be generated for a given value. An optional regex can be specified to structure the token format otherwise the format will be inferred based on the value. All future occurrences of this value will generate the same token for a given regex. For example, a format preserving token for 'johndoe@gmail.com' will always generate the token 'bwe09f@fg7d8.com'.",
+                "descriptionV2": "A persistent, format preserving token will be generated for a given value. An optional regex can be specified to structure the token format otherwise the format will be inferred based on the value. All future occurrences of this value will generate the same token for a given regex. For example, a format preserving token for 'johndoe@gmail.com' will always generate the token 'bwe09f@fg7d8.com'.",
+                "version": 2,
+                "dataTypes": [
+                    "DT_STRING",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_INT32",
+                    "DT_FLOAT32"
+                ],
+                "arrayDataTypes": [],
+                "childrenTags": [
+                    {
+                        "tagName": "skyflow.options.format_preserving_regex",
+                        "displayName": "Format Preserving Regular Expression",
+                        "displayNameV2": "Format Preserving Regular Expression",
+                        "description": "Format preserving regular expression to be used in generating the token. If not provided, then token will be generated based on the input, preserving the input structure and length.",
+                        "descriptionV2": "Format preserving regular expression to be used in generating the token. If not provided, then token will be generated based on the input, preserving the input structure and length.",
+                        "optional": true,
+                        "allowedOperations": {
+                            "field": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "composite": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "compositeArray": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            }
+                        },
+                        "valueType": "string",
+                        "dataTypes": [
+                            "DT_STRING",
+                            "DT_ENUM",
+                            "DT_DATETIME",
+                            "DT_DATE",
+                            "DT_TIME",
+                            "DT_INT32",
+                            "DT_FLOAT32"
+                        ],
+                        "arrayDataTypes": []
+                    }
+                ]
+            },
+            {
+                "valueName": "NON_DETERMINISTIC_FPT",
+                "displayName": "Format Preserving Token",
+                "displayNameV2": "Format Preserving Token",
+                "description": "A format preserving token will be generated for a given value. An optional regex can be specified to structure the token format otherwise the format will be inferred based on the value. For example, a format preserving token for 'johndoe@gmail.com' could be 'bwe09f@fg7d8.com'. Each future occurrence of the value 'johndoe@gmail.com' will create a different random token but one that follows the given regex.",
+                "descriptionV2": "A format preserving token will be generated for a given value. An optional regex can be specified to structure the token format otherwise the format will be inferred based on the value. For example, a format preserving token for 'johndoe@gmail.com' could be 'bwe09f@fg7d8.com'. Each future occurrence of the value 'johndoe@gmail.com' will create a different random token but one that follows the given regex.",
+                "version": 2,
+                "dataTypes": [
+                    "DT_STRING",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ],
+                "arrayDataTypes": [],
+                "childrenTags": [
+                    {
+                        "tagName": "skyflow.options.format_preserving_regex",
+                        "displayName": "Format Preserving Regular Expression",
+                        "displayNameV2": "Format Preserving Regular Expression",
+                        "description": "Format preserving regular expression to be used in generating the token. If not provided, then token will be generated based on the input, preserving the input structure and length.",
+                        "descriptionV2": "Format preserving regular expression to be used in generating the token. If not provided, then token will be generated based on the input, preserving the input structure and length.",
+                        "optional": true,
+                        "allowedOperations": {
+                            "field": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "composite": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "compositeArray": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            }
+                        },
+                        "valueType": "string",
+                        "dataTypes": [
+                            "DT_STRING",
+                            "DT_ENUM",
+                            "DT_DATETIME",
+                            "DT_DATE",
+                            "DT_TIME"
+                        ],
+                        "arrayDataTypes": []
+                    }
+                ]
+            },
+            {
+                "valueName": "DETERMINISTIC_PRESERVE_LEFT_6_RIGHT_4",
+                "displayName": "Left 6 Right 4 Preserving Deterministic Token",
+                "displayNameV2": "Left 6 Right 4",
+                "description": "A persistent, token preserving left 6 and right 4 digits will be generated for a given value.",
+                "descriptionV2": "Generate tokens that preserve the left 6 characters and right 4 characters of a value.",
+                "version": 3,
+                "skyflowDataTypes": [
+                    "skyflow.CardNumber"
+                ]
+            },
+            {
+                "valueName": "DETERMINISTIC_PRESERVE_EMAIL_DOMAIN",
+                "displayName": "Domain Preserving Deterministic Token",
+                "displayNameV2": "Domain Preserving Deterministic Token",
+                "description": "A persistent, token preserving email domain will be generated for a given value.",
+                "descriptionV2": "Generate tokens that preserve the email domain to the right of the “@” symbol.",
+                "version": 3,
+                "skyflowDataTypes": [
+                    "skyflow.Email"
+                ]
+            },
+            {
+                "valueName": "DETERMINISTIC_PRESERVE_RIGHT_4",
+                "displayName": "Right 4 Preserving Deterministic Token",
+                "displayNameV2": "Right 4",
+                "description": "A persistent, right 4 char preserving token will be generated for a given value.",
+                "descriptionV2": "Generate tokens that preserve the right 4 characters of a value.",
+                "version": 3,
+                "valueType": "string",
+                "dataTypes": [
+                    "DT_STRING"
+                ],
+                "childrenTags": [
+                    {
+                        "tagName": "skyflow.options.token_prefix",
+                        "displayName": "Token Preserving Prefix",
+                        "displayNameV2": "Token Preserving Prefix",
+                        "description": "Format preserving prefix to be prepended to the token.",
+                        "descriptionV2": "Format preserving prefix to be prepended to the token.",
+                        "optional": true,
+                        "valueType": "string",
+                        "dataTypes": [
+                            "DT_STRING"
+                        ],
+                        "arrayDataTypes": []
+                    },
+                    {
+                        "tagName": "skyflow.options.token_fixed_length",
+                        "displayName": "Token Fixed Length",
+                        "displayNameV2": "Token Fixed Length",
+                        "description": "Fixed length of token if minimum required length isn't reached",
+                        "descriptionV2": "Fixed length of token if minimum required length isn't reached",
+                        "optional": true,
+                        "allowedOperations": {
+                            "field": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "composite": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "compositeArray": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            }
+                        },
+                        "valueType": "string",
+                        "dataTypes": [
+                            "DT_STRING"
+                        ],
+                        "arrayDataTypes": []
+                    },
+                    {
+                        "tagName": "skyflow.options.token_separator",
+                        "displayName": "Token Separator",
+                        "displayNameV2": "Token Separator",
+                        "description": "Separator inserted between a token's prefix, tokenized data, and suffix. For example, with a separator of '_', prefix of '99', tokenized data of 'XXXX', and suffix of '7852', the returned token is '99_XXXX_7852'. If the separator is an empty string, no separators are inserted in the token.",
+                        "descriptionV2": "Separator inserted between a token's prefix, tokenized data, and suffix. For example, with a separator of '_', prefix of '99', tokenized data of 'XXXX', and suffix of '7852', the returned token is '99_XXXX_7852'. If the separator is an empty string, no separators are inserted in the token.",
+                        "optional": true,
+                        "allowedOperations": {
+                            "field": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "composite": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "compositeArray": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            }
+                        },
+                        "valueType": "string",
+                        "dataTypes": [
+                            "DT_STRING"
+                        ],
+                        "arrayDataTypes": []
+                    }
+                ]
+            },
+            {
+                "valueName": "NON_DETERMINISTIC_PRESERVE_RIGHT_4",
+                "displayName": "Right 4 Preserving Non Deterministic Token",
+                "displayNameV2": "Right 4 Preserving Non Deterministic",
+                "description": "A persistent, right 4 char preserving non deterministic token will be generated for a given value.",
+                "descriptionV2": "Generate non deterministic tokens that preserve the right 4 characters of a value.",
+                "version": 3,
+                "valueType": "string",
+                "dataTypes": [
+                    "DT_STRING"
+                ],
+                "childrenTags": [
+                    {
+                        "tagName": "skyflow.options.token_prefix",
+                        "displayName": "Token Preserving Prefix",
+                        "displayNameV2": "Token Preserving Prefix",
+                        "description": "Format preserving prefix to be prepended to the token.",
+                        "descriptionV2": "Format preserving prefix to be prepended to the token.",
+                        "optional": true,
+                        "valueType": "string",
+                        "dataTypes": [
+                            "DT_STRING"
+                        ],
+                        "arrayDataTypes": []
+                    },
+                    {
+                        "tagName": "skyflow.options.token_fixed_length",
+                        "displayName": "Token Fixed Length",
+                        "displayNameV2": "Token Fixed Length",
+                        "description": "Fixed length of token if minimum required length isn't reached",
+                        "descriptionV2": "Fixed length of token if minimum required length isn't reached",
+                        "optional": true,
+                        "allowedOperations": {
+                            "field": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "composite": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "compositeArray": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            }
+                        },
+                        "valueType": "string",
+                        "dataTypes": [
+                            "DT_STRING"
+                        ],
+                        "arrayDataTypes": []
+                    },
+                    {
+                        "tagName": "skyflow.options.token_separator",
+                        "displayName": "Token Separator",
+                        "displayNameV2": "Token Separator",
+                        "description": "Separator inserted between a token's prefix, tokenized data, and suffix. For example, with a separator of '_', prefix of '99', tokenized data of 'XXXX', and suffix of '7852', the returned token is '99_XXXX_7852'. If the separator is an empty string, no separators are inserted in the token.",
+                        "descriptionV2": "Separator inserted between a token's prefix, tokenized data, and suffix. For example, with a separator of '_', prefix of '99', tokenized data of 'XXXX', and suffix of '7852', the returned token is '99_XXXX_7852'. If the separator is an empty string, no separators are inserted in the token.",
+                        "optional": true,
+                        "allowedOperations": {
+                            "field": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "composite": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "compositeArray": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            }
+                        },
+                        "valueType": "string",
+                        "dataTypes": [
+                            "DT_STRING"
+                        ],
+                        "arrayDataTypes": []
+                    }
+                ]
+            },
+            {
+                "valueName": "NON_DETERMINISTIC_TRANSIENT_UUID",
+                "displayName": "Transient UUID Token",
+                "displayNameV2": "Transient tokenization",
+                "description": "A random token will be generated each time for a given value. For example, a random token for 'johndoe@gmail.com' could be 'c7db3f3a-5d01-4a98-961e-9cbdb6241b0d'. Each future occurrence of the value 'johndoe@gmail.com' will create a different random token.",
+                "descriptionV2": "Generate tokens for temporary storage of sensitive values. Your vault automatically deletes values for these tokens after a defined period of time.",
+                "version": 2,
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ],
+                "childrenTags": [
+                    {
+                        "tagName": "skyflow.options.ttl",
+                        "displayName": "Time to live",
+                        "displayNameV2": "Time to live",
+                        "description": "Time to live for transient fields",
+                        "descriptionV2": "Time to live for transient fields",
+                        "optional": true,
+                        "allowedOperations": {
+                            "field": {
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            }
+                        },
+                        "valueType": "integer",
+                        "dataTypes": [
+                            "DT_INT32",
+                            "DT_FLOAT32",
+                            "DT_BOOL",
+                            "DT_STRING",
+                            "DT_ENUM",
+                            "DT_DATETIME",
+                            "DT_DATE",
+                            "DT_TIME"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "tagName": "skyflow.options.default_dlp_policy",
+        "displayName": "Redaction",
+        "displayNameV2": "Redaction",
+        "description": "Redaction is a privacy preservation technique where data is partially or completely obscured when viewed. This can help prevent unauthorized access to sensitive data. Redaction does not change the underlying data, just how it is displayed.",
+        "descriptionV2": "Redaction partially or completely obscures values when viewed to prevent authorized access to sensitive data. Redaction doesn't change the underlying data.",
+        "allowedOperations": {
+            "field": {
+                "withData": [
+                    "ADD",
+                    "UPDATE",
+                    "DELETE"
+                ],
+                "withoutData": [
+                    "ADD",
+                    "UPDATE",
+                    "DELETE"
+                ]
+            },
+            "composite": {},
+            "compositeArray": {}
+        },
+        "valueType": "constants",
+        "values": [
+            {
+                "valueName": "REDACT",
+                "displayName": "Redacted",
+                "displayNameV2": "Full redaction",
+                "description": "This column will be completely redacted by default. For example, the email address johndoe@acme.com would appear as REDACTED by default.",
+                "descriptionV2": "By default, completely redact values. For example, \"johndoe@mail.com\" appears as \"REDACTED\".",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ]
+            },
+            {
+                "valueName": "MASK",
+                "displayName": "Masked",
+                "displayNameV2": "Partial redaction",
+                "description": "This column will be partially redacted based on the mask specified below by default. For example, the email address johndoe@acme.com would appear as ***@acme.com given the appropriate mask. Masks are specified using regex.",
+                "descriptionV2":"By default, partially redact values based on the specified find and replace regex patterns. For example, \"johndoe@mail.com\" can appear as \"***@mail.com\" with the appropriate patterns.",
+                "dataTypes": [
+                    "DT_STRING",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ],
+                "arrayDataTypes": [
+                    "DT_STRING",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ],
+                "childrenTags": [
+                    {
+                        "tagName": "skyflow.options.find_pattern",
+                        "displayName": "Find Pattern",
+                        "displayNameV2": "Find Pattern",
+                        "description": "Pattern (Regular expression) to find the input value.",
+                        "descriptionV2": "Pattern (Regular expression) to find the input value.",
+                        "allowedOperations": {
+                            "field": {
+                                "withData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ],
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "composite": {
+                                "withData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ],
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "compositeArray": {
+                                "withData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ],
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            }
+                        },
+                        "valueType": "string",
+                        "dataTypes": [
+                            "DT_STRING",
+                            "DT_ENUM",
+                            "DT_DATETIME",
+                            "DT_DATE",
+                            "DT_TIME",
+                            "DT_EMBEDDED"
+                        ],
+                        "arrayDataTypes": [
+                            "DT_STRING",
+                            "DT_ENUM",
+                            "DT_DATETIME",
+                            "DT_DATE",
+                            "DT_TIME",
+                            "DT_EMBEDDED"
+                        ]
+                    },
+                    {
+                        "tagName": "skyflow.options.replace_pattern",
+                        "displayName": "Replace Pattern",
+                        "displayNameV2": "Replace Pattern",
+                        "description": "Pattern (regular expression) to replace a value.",
+                        "descriptionV2": "Pattern (regular expression) to replace a value.",
+                        "allowedOperations": {
+                            "field": {
+                                "withData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ],
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "composite": {
+                                "withData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ],
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            },
+                            "compositeArray": {
+                                "withData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ],
+                                "withoutData": [
+                                    "ADD",
+                                    "UPDATE",
+                                    "DELETE"
+                                ]
+                            }
+                        },
+                        "valueType": "string",
+                        "dataTypes": [
+                            "DT_STRING",
+                            "DT_ENUM",
+                            "DT_DATETIME",
+                            "DT_DATE",
+                            "DT_TIME",
+                            "DT_EMBEDDED"
+                        ],
+                        "arrayDataTypes": [
+                            "DT_STRING",
+                            "DT_ENUM",
+                            "DT_DATETIME",
+                            "DT_DATE",
+                            "DT_TIME",
+                            "DT_EMBEDDED"
+                        ]
+                    }
+                ]
+            },
+            {
+                "valueName": "PLAIN_TEXT",
+                "displayName": "Plain Text",
+                "displayNameV2": "No redaction",
+                "description": "This column will not be redacted and will appear in plain text by default. It's recommended that this setting only be applied to non-sensitive columns.",
+                "descriptionV2": "By default, display values in plain text. Only apply this setting to non-sensitive columns.",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            }
+        ]
+    },
+    {
+        "tagName": "skyflow.validation.regular_exp",
+        "displayName": "Regular Expression",
+        "displayNameV2": "Regular Expression",
+        "description": "Add validations for this column by specifying regex strings below",
+        "descriptionV2": "Add validations for this column by specifying regex strings below",
+        "canTakeMultipleValues": true,
+        "allowedOperations": {
+            "field": {
+                "withData": [
+                    "UPDATE"
+                ],
+                "withoutData": [
+                    "ADD",
+                    "UPDATE",
+                    "DELETE"
+                ]
+            },
+            "composite": {},
+            "compositeArray": {}
+        },
+        "valueType": "string",
+        "dataTypes": [
+            "DT_STRING"
+        ],
+        "arrayDataTypes": [
+            "DT_STRING"
+        ]
+    },
+    {
+        "tagName": "skyflow.validation.predefinedvalues",
+        "displayName": "Predefined Values",
+        "displayNameV2": "Predefined Values",
+        "description": "predefined values",
+        "descriptionV2": "predefined values",
+        "canTakeMultipleValues": true,
+        "allowedOperations": {
+            "field": {
+                "withData": [
+                    "ADD"
+                ],
+                "withoutData": [
+                    "ADD",
+                    "UPDATE",
+                    "DELETE"
+                ]
+            },
+            "composite": {},
+            "compositeArray": {}
+        },
+        "valueType": "string",
+        "dataTypes": [
+            "DT_ENUM"
+        ],
+        "arrayDataTypes": [
+            "DT_ENUM"
+        ]
+    },
+    {
+        "tagName": "skyflow.options.display_name",
+        "displayName": "Display name",
+        "displayNameV2": "Display name",
+        "description": "Display name",
+        "descriptionV2": "Display name",
+        "valueType": "string",
+        "dataTypes": [
+            "DT_INT32",
+            "DT_FLOAT32",
+            "DT_BOOL",
+            "DT_STRING",
+            "DT_EMBEDDED",
+            "DT_ENUM",
+            "DT_DATETIME",
+            "DT_DATE",
+            "DT_TIME",
+            "DT_FILE_TYPE"
+        ],
+        "arrayDataTypes": [
+            "DT_INT32",
+            "DT_FLOAT32",
+            "DT_BOOL",
+            "DT_STRING",
+            "DT_EMBEDDED",
+            "DT_ENUM",
+            "DT_DATETIME",
+            "DT_DATE",
+            "DT_TIME",
+            "DT_FILE_TYPE"
+        ]
+    },
+    {
+        "tagName": "skyflow.options.sensitivity",
+        "displayName": "Sensitivity",
+        "displayNameV2": "Sensitivity",
+        "description": "Sensitivity Level of a PDT. Greater the harm caused by upon discloser or compromisation of something, higher its sensitivity",
+        "descriptionV2": "Sensitivity Level of a PDT. Greater the harm caused by upon discloser or compromisation of something, higher its sensitivity",
+        "canTakeMultipleValues": true,
+        "valueType": "constants",
+        "values": [
+            {
+                "valueName": "HIGH",
+                "displayName": "High",
+                "displayNameV2": "High",
+                "description": "Highly Sensitive",
+                "descriptionV2": "Highly Sensitive",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            },
+            {
+                "valueName": "LOW",
+                "displayName": "Low",
+                "displayNameV2": "Low",
+                "description": "Low Sensitive",
+                "descriptionV2": "Low Sensitive",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            },
+            {
+                "valueName": "MEDIUM",
+                "displayName": "Medium",
+                "displayNameV2": "Medium",
+                "description": "Moderate Sensitive",
+                "descriptionV2": "Moderate Sensitive",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            }
+        ]
+    },
+    {
+        "tagName": "skyflow.options.identifiability",
+        "displayName": "Identifiability",
+        "displayNameV2": "Identifiability",
+        "description": "Identifiability of a data column is defined as the ease at which the user/person to which the personal data belongs to can be identified.",
+        "descriptionV2": "Identifiability of a data column is defined as the ease at which the user/person to which the personal data belongs to can be identified.",
+        "canTakeMultipleValues": true,
+        "valueType": "constants",
+        "values": [
+            {
+                "valueName": "UNKNOWN_IDENTIFIABILITY",
+                "displayName": "Unknown Identifiability",
+                "displayNameV2": "Unknown Identifiability",
+                "description": "Unknown Identifiability",
+                "descriptionV2": "Unknown Identifiability",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            },
+            {
+                "valueName": "HIGH_IDENTIFIABILITY",
+                "displayName": "High Identifiability",
+                "displayNameV2": "High Identifiability",
+                "description": "Data that can uniquely identify the person such as Name, address, email address.",
+                "descriptionV2": "Data that can uniquely identify the person such as Name, address, email address.",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            },
+            {
+                "valueName": "MODERATE_IDENTIFIABILITY",
+                "displayName": "Moderate Identifiability",
+                "displayNameV2": "Moderate Identifiability",
+                "description": "Can be identified relatively easily when combined with other data but cannot uniquely identify the person",
+                "descriptionV2": "Can be identified relatively easily when combined with other data but cannot uniquely identify the person",                
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            },
+            {
+                "valueName": "LOW_IDENTIFIABILITY",
+                "displayName": "Low Identifiability",
+                "displayNameV2": "Low Identifiability",
+                "description": "Cannot be identified easily or with the given data column alone",
+                "descriptionV2": "Cannot be identified easily or with the given data column alone",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            }
+        ]
+    },
+    {
+        "tagName": "skyflow.options.personal_information_type",
+        "displayName": "Personal information type",
+        "displayNameV2": "Personal information type",
+        "description": "Personal information type",
+        "descriptionV2": "Personal information type",
+        "canTakeMultipleValues": true,
+        "valueType": "constants",
+        "values": [
+            {
+                "valueName": "PII",
+                "displayName": "PII",
+                "displayNameV2": "PII",
+                "description": "Personally Identifiable Information can be used to distinguish or trace an individual’s identity, either alone or when combined with other information that is linked or linkable to a specific individual.",
+                "descriptionV2": "Personally Identifiable Information can be used to distinguish or trace an individual’s identity, either alone or when combined with other information that is linked or linkable to a specific individual.",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            },
+            {
+                "valueName": "PHI",
+                "displayName": "PHI",
+                "displayNameV2": "PHI",
+                "description": "Protected health information is the term given to health data created, received, stored, or transmitted by HIPAA-covered entities and their business associates",
+                "descriptionV2": "Protected health information is the term given to health data created, received, stored, or transmitted by HIPAA-covered entities and their business associates",          
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            },
+            {
+                "valueName": "PCI",
+                "displayName": "PCI",
+                "displayNameV2": "PCI",
+                "description": "Payment Card Industry Data Security Standard (PCI DSS) is a set of requirements intended to ensure that all companies that process, store, or transmit credit card information maintain a secure environment",
+                "descriptionV2": "Payment Card Industry Data Security Standard (PCI DSS) is a set of requirements intended to ensure that all companies that process, store, or transmit credit card information maintain a secure environment",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            },
+            {
+                "valueName": "NPI",
+                "displayName": "NPI",
+                "displayNameV2": "NPI",
+                "description": "Nonpublic personal information - Personally identifiable financial information - provided by a consumer to a financial institution, resulting from any transaction with the consumer",
+                "descriptionV2": "Nonpublic personal information - Personally identifiable financial information - provided by a consumer to a financial institution, resulting from any transaction with the consumer",            
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            }
+        ]
+    },
+    {
+        "tagName": "skyflow.options.privacy_law",
+        "displayName": "Privacy Law",
+        "displayNameV2": "Privacy Law",
+        "description": "Privacy Law",
+        "descriptionV2": "Privacy Law",
+        "canTakeMultipleValues": true,
+        "valueType": "constants",
+        "values": [
+            {
+                "valueName": "UNKNOWN_PRIVACY_LAW",
+                "displayName": "Unknown Privacy Law",
+                "displayNameV2": "Unknown Privacy Law",
+                "description": "Unknown Privacy Law",
+                "descriptionV2": "Unknown Privacy Law",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            },
+            {
+                "valueName": "GDPR",
+                "displayName": "GDPR",
+                "displayNameV2": "GDPR",
+                "description": "The General Data Protection Regulation is a regulation in EU law on data protection and privacy in the European Union and the European Economic Area",
+                "descriptionV2": "The General Data Protection Regulation is a regulation in EU law on data protection and privacy in the European Union and the European Economic Area",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            },
+            {
+                "valueName": "CCPA",
+                "displayName": "CCPA",
+                "displayNameV2": "CCPA",
+                "description": "The California Consumer Privacy Act is a state statute intended to enhance privacy rights and consumer protection for residents of California, United States",
+                "descriptionV2": "The California Consumer Privacy Act is a state statute intended to enhance privacy rights and consumer protection for residents of California, United States",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            },
+            {
+                "valueName": "COPPA",
+                "displayName": "COPPA",
+                "displayNameV2": "COPPA",
+                "description": "COPPA",
+                "descriptionV2": "COPPA",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            },
+            {
+                "valueName": "HIPAA",
+                "displayName": "HIPAA",
+                "displayNameV2": "HIPAA",
+                "description": "The Health Insurance Portability and Accountability Act of 1996 (HIPAA) is a federal law that required the creation of national standards to protect sensitive patient health information from being disclosed without the patient’s consent or knowledge.",
+                "descriptionV2": "The Health Insurance Portability and Accountability Act of 1996 (HIPAA) is a federal law that required the creation of national standards to protect sensitive patient health information from being disclosed without the patient’s consent or knowledge.",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            },
+            {
+                "valueName": "GLBA",
+                "displayName": "GLBA",
+                "displayNameV2": "GLBA",
+                "description": "The Gramm-Leach-Bliley Act requires financial institutions – companies that offer consumers financial products or services like loans, financial or investment advice, or insurance – to explain their information-sharing practices to their customers and to safeguard sensitive data.",
+                "descriptionV2": "The Gramm-Leach-Bliley Act requires financial institutions – companies that offer consumers financial products or services like loans, financial or investment advice, or insurance – to explain their information-sharing practices to their customers and to safeguard sensitive data.",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            },
+            {
+                "valueName": "US_PRIVACY_ACTIVITY",
+                "displayName": "US Privacy Activity",
+                "displayNameV2": "US Privacy Activity",
+                "description": "US Privacy Activity",
+                "descriptionV2": "US Privacy Activity",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_FILE_TYPE"
+                ]
+            }
+        ]
+    },
+    {
+        "tagName": "skyflow.options.configuration_tags",
+        "displayName": "Configuration Tags",
+        "displayNameV2": "Configuration Tags",
+        "description": "Configuration Tags",
+        "descriptionV2": "Configuration Tags",
+        "canTakeMultipleValues": true,
+        "valueType": "constants",
+        "values": [
+            {
+                "valueName": "NULLABLE",
+                "displayName": "Nullable",
+                "displayNameV2": "Nullable",
+                "description": "NULLABLE",
+                "descriptionV2": "NULLABLE",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM"
+                ]
+            },
+            {
+                "valueName": "PRIMARY_KEY",
+                "displayName": "Primary Key",
+                "displayNameV2": "Primary Key",
+                "description": "Primary Key",
+                "descriptionV2": "Primary Key",
+                "dataTypes": [
+                    "DT_STRING"
+                ],
+                "arrayDataTypes": [
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "UNIQUE",
+                "displayName": "Unique",
+                "displayNameV2": "Unique",
+                "description": "Unique",
+                "descriptionV2": "Unique",
+                "dataTypes": [
+                    "DT_FLOAT32",
+                    "DT_INT32",
+                    "DT_STRING",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ],
+                "arrayDataTypes": [
+                ]
+            },
+            {
+                "valueName": "INDEX",
+                "displayName": "Index",
+                "displayNameV2": "Index",
+                "description": "Index",
+                "descriptionV2": "Index",
+                "dataTypes": [
+                    "DT_FLOAT32",
+                    "DT_INT32",
+                    "DT_STRING",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_EMBEDDED"
+                ],
+                "arrayDataTypes": [
+                    "DT_FLOAT32",
+                    "DT_INT32",
+                    "DT_STRING",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ]
+            },
+            {
+                "valueName": "FOREIGN_KEY",
+                "displayName": "Foreign Key",
+                "displayNameV2": "Foreign Key",
+                "description": "Foreign Key",
+                "descriptionV2": "Foreign Key",
+                "dataTypes": [
+                    "DT_STRING"
+                ],
+                "arrayDataTypes": [
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "NOT_NULL",
+                "displayName": "Not Null",
+                "displayNameV2": "Not Null",
+                "description": "Not Null",
+                "descriptionV2": "Not Null",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM"
+                ]
+            },
+            {
+                "valueName": "META_DATA",
+                "displayName": "Meta Data",
+                "displayNameV2": "Meta Data",
+                "description": "Meta Data",
+                "descriptionV2": "Meta Data",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM"
+                ],
+                "arrayDataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_BOOL",
+                    "DT_STRING",
+                    "DT_EMBEDDED",
+                    "DT_ENUM"
+                ]
+            }
+        ]
+    },
+    {
+        "tagName": "skyflow.options.file_type",
+        "displayName": "File Type",
+        "displayNameV2": "File Type",
+        "description": "file type",
+        "descriptionV2": "file type",
+        "valueType": "constants",
+        "values": [
+            {
+                "valueName": "blob",
+                "displayName": "Blob",
+                "displayNameV2": "Blob",
+                "description": "blob",
+                "descriptionV2": "blob",
+                "dataTypes": [
+                    "DT_FILE_TYPE"
+                ],
+                "arrayDataTypes": [
+                    "DT_FILE_TYPE"
+                ]
+            }
+        ]
+    },
+    {
+        "tagName": "skyflow.options.unique",
+        "displayName": "Unique",
+        "displayNameV2": "Unique",
+        "description": "Unique.",
+        "descriptionV2": "Unique.",
+        "allowedOperations": {
+            "field": {
+                "withoutData": [
+                    "ADD",
+                    "UPDATE",
+                    "DELETE"
+                ]
+            }
+        },
+        "valueType": "constants",
+        "values": [
+            {
+                "valueName": "true",
+                "displayName": "True",
+                "displayNameV2": "True",
+                "description": "Unique.",
+                "descriptionV2": "Unique.",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_STRING",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ]
+            },
+            {
+                "valueName": "false",
+                "displayName": "False",
+                "displayNameV2": "False",
+                "description": "Non-unique.",
+                "descriptionV2": "Non-unique.",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_STRING",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ]
+            }
+        ]
+    },
+    {
+        "tagName": "skyflow.options.index",
+        "displayName": "Index",
+        "displayNameV2": "Index",
+        "description": "Index.",
+        "descriptionV2": "Index.",
+        "allowedOperations": {
+            "field": {
+                "withoutData": [
+                    "ADD",
+                    "UPDATE",
+                    "DELETE"
+                ]
+            }
+        },
+        "valueType": "constants",
+        "values": [
+            {
+                "valueName": "true",
+                "displayName": "True",
+                "displayNameV2": "True",
+                "description": "Index.",
+                "descriptionV2": "Index.",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_STRING",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_EMBEDDED"
+                ]
+            },
+            {
+                "valueName": "false",
+                "displayName": "False",
+                "displayNameV2": "False",
+                "description": "No index.",
+                "descriptionV2": "No index.",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_STRING",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME",
+                    "DT_EMBEDDED"
+                ]
+            }
+        ]
+    },
+    {
+        "tagName": "skyflow.options.column_group",
+        "displayName": "Column Group",
+        "displayNameV2": "Column Group",
+        "description": "Defines the Group of the column to which it belongs",
+        "descriptionV2": "Defines the Group of the column to which it belongs",
+        "allowedOperations": {
+            "field": {
+                "withoutData": [
+                    "ADD",
+                    "UPDATE",
+                    "DELETE"
+                ]
+            },
+            "composite": {},
+            "compositeArray": {}
+        },
+        "valueType": "string",
+        "dataTypes": [
+            "DT_STRING"
+        ],
+        "arrayDataTypes": [
+            "DT_STRING"
+        ]
+    },
+    {
+        "tagName": "skyflow.options.not_null",
+        "displayName": "Notnull",
+        "displayNameV2": "Notnull",
+        "description": "No nil value allowed in column",
+        "descriptionV2": "No nil value allowed in column",
+        "allowedOperations": {
+            "field": {
+                "withoutData": [
+                    "ADD",
+                    "UPDATE",
+                    "DELETE"
+                ]
+            }
+        },
+        "valueType": "constants",
+        "values": [
+            {
+                "valueName": "true",
+                "displayName": "True",
+                "displayNameV2": "True",
+                "description": "not null tag.",
+                "descriptionV2": "not null tag.",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_INT64",
+                    "DT_FLOAT64",
+                    "DT_STRING",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ]
+            },
+            {
+                "valueName": "false",
+                "displayName": "False",
+                "displayNameV2": "False",
+                "description": "not null.",
+                "descriptionV2": "not null.",
+                "dataTypes": [
+                    "DT_INT32",
+                    "DT_FLOAT32",
+                    "DT_STRING",
+                    "DT_INT64",
+                    "DT_FLOAT64",
+                    "DT_DATETIME",
+                    "DT_DATE",
+                    "DT_TIME"
+                ]
+            }
+        ]
+    },
+    {
+        "tagName": "skyflow.options.entity",
+        "displayName": "Entity",
+        "displayNameV2": "Entity",
+        "description": "Skyflow Entity type to detect and deidentify.",
+        "descriptionV2": "Skyflow Entity type to detect and deidentify.",
+        "canTakeMultipleValues": true,
+        
+        "valueType": "constants",
+        "values": [
+            {
+                "valueName": "name",
+                "displayName": "name",
+                "displayNameV2": "name",
+                "description": "Names of individuals, not including personal titles such as ‘Mrs.’ or ‘Mr.’.",
+                "descriptionV2": "Names of individuals, not including personal titles such as ‘Mrs.’ or ‘Mr.’.",
+                "dataTypes": [                    
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "name_given",
+                "displayName": "name_given",
+                "displayNameV2": "name_given",
+                "description": "Names given to an individual, usually at birth.",
+                "descriptionV2": "Names given to an individual, usually at birth.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "age",
+                "displayName": "age",
+                "displayNameV2": "age",
+                "description": "Numbers associated with an individual’s age.",
+                "descriptionV2": "Numbers associated with an individual’s age.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "bank_account",
+                "displayName": "bank_account",
+                "displayNameV2": "bank_account",
+                "description": "Bank account numbers and international equivalents.",
+                "descriptionV2": "Bank account numbers and international equivalents.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "credit_card",
+                "displayName": "credit_card",
+                "displayNameV2": "credit_card",
+                "description": "Credit card numbers.",
+                "descriptionV2": "Credit card numbers.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "credit_card_expiration",
+                "displayName": "credit_card_expiration",
+                "displayNameV2": "credit_card_expiration",
+                "description": "Expiration date of a credit card.",
+                "descriptionV2": "Expiration date of a credit card.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "cvv",
+                "displayName": "cvv",
+                "displayNameV2": "cvv",
+                "description": "3 or 4 digit card verification codes and equivalents.",
+                "descriptionV2": "3 or 4 digit card verification codes and equivalents.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "date",
+                "displayName": "date",
+                "displayNameV2": "date",
+                "description": "Specific calendar dates, which can include days of the week, dates, months, or years.",
+                "descriptionV2": "Specific calendar dates, which can include days of the week, dates, months, or years.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "date_interval",
+                "displayName": "date_interval",
+                "displayNameV2": "date_interval",
+                "description": "Broader time periods, including date ranges, months, seasons, years, and decades.",
+                "descriptionV2": "Broader time periods, including date ranges, months, seasons, years, and decades.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "dob",
+                "displayName": "dob",
+                "displayNameV2": "dob",
+                "description": "Date of birth.",
+                "descriptionV2": "Date of birth.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "driver_license",
+                "displayName": "driver_license",
+                "displayNameV2": "driver_license",
+                "description": "Driver's permit numbers.",
+                "descriptionV2": "Driver's permit numbers.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "email_address",
+                "displayName": "email_address",
+                "displayNameV2": "email_address",
+                "description": "Email addresses.",
+                "descriptionV2": "Email addresses.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "healthcare_number",
+                "displayName": "healthcare_number",
+                "displayNameV2": "healthcare_number",
+                "description": "Healthcare numbers and health plan beneficiary numbers.",
+                "descriptionV2": "Healthcare numbers and health plan beneficiary numbers.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "ip_address",
+                "displayName": "ip_address",
+                "displayNameV2": "ip_address",
+                "description": "Internet IP address, including IPv4 and IPv6 formats.",
+                "descriptionV2": "Internet IP address, including IPv4 and IPv6 formats.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "location",
+                "displayName": "location",
+                "displayNameV2": "location",
+                "description": "Metaclass for any named location reference; See subclasses below.",
+                "descriptionV2": "Metaclass for any named location reference; See subclasses below.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "numerical_pii",
+                "displayName": "numerical_pii",
+                "displayNameV2": "numerical_pii",
+                "description": "Numerical PII (including alphanumeric strings) such as device serial numbers, POS codes etc.",
+                "descriptionV2": "Numerical PII (including alphanumeric strings) such as device serial numbers, POS codes etc.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "phone_number",
+                "displayName": "phone_number",
+                "displayNameV2": "phone_number",
+                "description": "Telephone or fax numbers.",
+                "descriptionV2": "Telephone or fax numbers.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "ssn",
+                "displayName": "ssn",
+                "displayNameV2": "ssn",
+                "description": "Social Security Numbers or international equivalent government identification numbers.",
+                "descriptionV2": "Social Security Numbers or international equivalent government identification numbers.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "url",
+                "displayName": "url",
+                "displayNameV2": "url",
+                "description": "Internet addresses.",
+                "descriptionV2": "Internet addresses.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "vehicle_id",
+                "displayName": "vehicle_id",
+                "displayNameV2": "vehicle_id",
+                "description": "Vehicle identification numbers (VINs), vehicle serial numbers, and license plate numbers.",
+                "descriptionV2": "Vehicle identification numbers (VINs), vehicle serial numbers, and license plate numbers.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "medical_code",
+                "displayName": "medical_code",
+                "displayNameV2": "medical_code",
+                "description": "Codes belonging to medical classification systems.",
+                "descriptionV2": "Codes belonging to medical classification systems.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "name_family",
+                "displayName": "name_family",
+                "displayNameV2": "name_family",
+                "description": "Names indicating a person’s family or community.",
+                "descriptionV2": "Names indicating a person’s family or community.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "account_number",
+                "displayName": "account_number",
+                "displayNameV2": "account_number",
+                "description": "Customer account or membership identification number.",
+                "descriptionV2": "Customer account or membership identification number.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "event",
+                "displayName": "event",
+                "displayNameV2": "event",
+                "description": "Names of events or holidays.",
+                "descriptionV2": "Names of events or holidays.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "filename",
+                "displayName": "filename",
+                "displayNameV2": "filename",
+                "description": "Names of computer files, including the extension or filepath.",
+                "descriptionV2": "Names of computer files, including the extension or filepath.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "gender_sexuality",
+                "displayName": "gender_sexuality",
+                "displayNameV2": "gender_sexuality",
+                "description": "Terms indicating gender identity or sexual orientation, including slang terms.",
+                "descriptionV2": "Terms indicating gender identity or sexual orientation, including slang terms.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "language",
+                "displayName": "language",
+                "displayNameV2": "language",
+                "description": "Names of natural languages.",
+                "descriptionV2": "Names of natural languages.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "location_address",
+                "displayName": "location_address",
+                "displayNameV2": "location_address",
+                "description": "Full or partial physical mailing addresses.",
+                "descriptionV2": "Full or partial physical mailing addresses.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "location_city",
+                "displayName": "location_city",
+                "displayNameV2": "location_city",
+                "description": "Municipality names, including villages, towns, and cities.",
+                "descriptionV2": "Municipality names, including villages, towns, and cities.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "location_coordinate",
+                "displayName": "location_coordinate",
+                "displayNameV2": "location_coordinate",
+                "description": "Geographic positions referred to using latitude, longitude, and/or elevation coordinates.",
+                "descriptionV2": "Geographic positions referred to using latitude, longitude, and/or elevation coordinates.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "location_country",
+                "displayName": "location_country",
+                "displayNameV2": "location_country",
+                "description": "Country names.",
+                "descriptionV2": "Country names.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "location_state",
+                "displayName": "location_state",
+                "displayNameV2": "location_state",
+                "description": "State, province, territory, or prefecture names.",
+                "descriptionV2": "State, province, territory, or prefecture names.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "location_zip",
+                "displayName": "location_zip",
+                "displayNameV2": "location_zip",
+                "description": "Zip codes (including Zip+4), postcodes, or postal codes.",
+                "descriptionV2": "Zip codes (including Zip+4), postcodes, or postal codes.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "marital_status",
+                "displayName": "marital_status",
+                "displayNameV2": "marital_status",
+                "description": "Terms indicating marital status.",
+                "descriptionV2": "Terms indicating marital status.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "money",
+                "displayName": "money",
+                "displayNameV2": "money",
+                "description": "Names and/or amounts of currency.",
+                "descriptionV2": "Names and/or amounts of currency.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "name_medical_professional",
+                "displayName": "name_medical_professional",
+                "displayNameV2": "name_medical_professional",
+                "description": "Full names, including professional titles and certifications, of medical professional, such as doctors and nurses",
+                "descriptionV2": "Full names, including professional titles and certifications, of medical professional, such as doctors and nurses",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "occupation",
+                "displayName": "occupation",
+                "displayNameV2": "occupation",
+                "description": "Job titles or professions.",
+                "descriptionV2": "Job titles or professions.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "organization",
+                "displayName": "organization",
+                "displayNameV2": "organization",
+                "description": "Names of organizations or departments within an organization.",
+                "descriptionV2": "Names of organizations or departments within an organization.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "organization_medical_facility",
+                "displayName": "organization_medical_facility",
+                "displayNameV2": "organization_medical_facility",
+                "description": "Names of medical facilities, such as hospitals, clinics, pharmacies, etc.",
+                "descriptionV2": "Names of medical facilities, such as hospitals, clinics, pharmacies, etc.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "origin",
+                "displayName": "origin",
+                "displayNameV2": "origin",
+                "description": "Terms indicating nationality, ethnicity, or provenance.",
+                "descriptionV2": "Terms indicating nationality, ethnicity, or provenance.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "passport_number",
+                "displayName": "passport_number",
+                "displayNameV2": "passport_number",
+                "description": "Passport numbers, issued by any country.",
+                "descriptionV2": "Passport numbers, issued by any country.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "password",
+                "displayName": "password",
+                "displayNameV2": "password",
+                "description": "Account passwords, PINs, access keys, or verification answers.",
+                "descriptionV2": "Account passwords, PINs, access keys, or verification answers.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "physical_attribute",
+                "displayName": "physical_attribute",
+                "displayNameV2": "physical_attribute",
+                "description": "Distinctive bodily attributes, including terms indicating race.",
+                "descriptionV2": "Distinctive bodily attributes, including terms indicating race.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "political_affiliation",
+                "displayName": "political_affiliation",
+                "displayNameV2": "political_affiliation",
+                "description": "Terms referring to a political party, movement, or ideology.",
+                "descriptionV2": "Terms referring to a political party, movement, or ideology.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "religion",
+                "displayName": "religion",
+                "displayNameV2": "religion",
+                "description": "Terms indicating religious affiliation.",
+                "descriptionV2": "Terms indicating religious affiliation.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "time",
+                "displayName": "time",
+                "displayNameV2": "time",
+                "description": "Expressions indicating clock times.",
+                "descriptionV2": "Expressions indicating clock times.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "username",
+                "displayName": "username",
+                "displayNameV2": "username",
+                "description": "Usernames, login names, or handles.",
+                "descriptionV2": "Usernames, login names, or handles.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "zodiac_sign",
+                "displayName": "zodiac_sign",
+                "displayNameV2": "zodiac_sign",
+                "description": "Names of Zodiac signs.",
+                "descriptionV2": "Names of Zodiac signs.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "blood_type",
+                "displayName": "blood_type",
+                "displayNameV2": "blood_type",
+                "description": "Blood types.",
+                "descriptionV2": "Blood types.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "condition",
+                "displayName": "condition",
+                "displayNameV2": "condition",
+                "description": "Names of medical conditions.",
+                "descriptionV2": "Names of medical conditions.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "dose",
+                "displayName": "dose",
+                "displayNameV2": "dose",
+                "description": "Medically prescribed quantity of a medication.",
+                "descriptionV2": "Medically prescribed quantity of a medication.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "drug",
+                "displayName": "drug",
+                "displayNameV2": "drug",
+                "description": "Medications, vitamins, and supplements.",
+                "descriptionV2": "Medications, vitamins, and supplements.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "injury",
+                "displayName": "injury",
+                "displayNameV2": "injury",
+                "description": "Bodily injuries.",
+                "descriptionV2": "Bodily injuries.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "medical_process",
+                "displayName": "medical_process",
+                "displayNameV2": "medical_process",
+                "description": "Medical processes, including treatments, procedures, and tests.",
+                "descriptionV2": "Medical processes, including treatments, procedures, and tests.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "statistics",
+                "displayName": "statistics",
+                "displayNameV2": "statistics",
+                "description": "Medical statistics.",
+                "descriptionV2": "Medical statistics.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "routing_number",
+                "displayName": "routing_number",
+                "displayNameV2": "routing_number",
+                "description": "Routing number associated with a bank or financial institution.",
+                "descriptionV2": "Routing number associated with a bank or financial institution.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "corporate_action",
+                "displayName": "corporate_action",
+                "displayNameV2": "corporate_action",
+                "description": "Any action a company takes that could affect its stock value or its shareholders.",
+                "descriptionV2": "Any action a company takes that could affect its stock value or its shareholders.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "financial_metric",
+                "displayName": "financial_metric",
+                "displayNameV2": "financial_metric",
+                "description": "Financial metrics or financial ratios are quantitative indicators of a company’s financial health.",
+                "descriptionV2": "Financial metrics or financial ratios are quantitative indicators of a company’s financial health.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "product",
+                "displayName": "product",
+                "displayNameV2": "product",
+                "description": "Names or model numbers of items made by an organization.",
+                "descriptionV2": "Names or model numbers of items made by an organization.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "trend",
+                "displayName": "trend",
+                "displayNameV2": "trend",
+                "description": "A description of the “quality” or the direction in which a financial measurement is going.",
+                "descriptionV2": "A description of the “quality” or the direction in which a financial measurement is going.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "duration",
+                "displayName": "duration",
+                "displayNameV2": "duration",
+                "description": "Periods of time, specified as a number and a unit of time.",
+                "descriptionV2": "Periods of time, specified as a number and a unit of time.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            },
+            {
+                "valueName": "location_address_street",
+                "displayName": "location_address_street",
+                "displayNameV2": "location_address_street",
+                "description": "A subclass of location_address, covering: a building number and street name, plus information like a unit numbers, office numbers, floor numbers and building names, where applicable.",
+                "descriptionV2": "A subclass of location_address, covering: a building number and street name, plus information like a unit numbers, office numbers, floor numbers and building names, where applicable.",
+                "dataTypes": [
+                    "DT_STRING"                    
+                ],
+                "arrayDataTypes": [                    
+                    "DT_STRING"
+                ]
+            }
+        ]
+    },
+    {
+        "tagName": "skyflow.options.allowed_file_types",
+        "displayName": "Allowed File Types",
+        "displayNameV2": "Allowed File Types",
+        "description": "Add Allowed File Types for this column by specifying standard MIME types below.",
+        "descriptionV2": "Add Allowed File Types for this column by specifying standard MIME types below.",
+        "canTakeMultipleValues": true,
+        "allowedOperations": {
+            "field": {
+                "withoutData": [
+                    "ADD",
+                    "UPDATE",
+                    "DELETE"
+                ]
+            },
+            "composite": {},
+            "compositeArray": {}
+        },
+        "valueType": "string",
+        "dataTypes": [
+            "DT_STRING"
+        ],
+        "arrayDataTypes": [
+            "DT_STRING"
+        ]
+    },
+    {
+        "tagName": "skyflow.options.fileuploadurl_expiry",
+        "displayName": "File Upload URL Expiry",
+        "displayNameV2": "File Upload URL Expiry",
+        "description": "Add File Upload URL Expiry for this column by specifying valid value.",
+        "descriptionV2": "Add File Upload URL Expiry for this column by specifying valid value.",
+        "canTakeMultipleValues": true,
+        "allowedOperations": {
+            "field": {
+                "withoutData": [
+                    "ADD",
+                    "UPDATE",
+                    "DELETE"
+                ]
+            },
+            "composite": {},
+            "compositeArray": {}
+        },
+        "valueType": "integer",
+        "dataTypes": [
+            "DT_INT32"
+        ],
+        "arrayDataTypes": [
+            "DT_INT32"
+        ]
+    }
+]
