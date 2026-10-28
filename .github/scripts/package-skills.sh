@@ -3,8 +3,8 @@
 # Package each Skyflow skill directory into a portable zip.
 #
 # Each zip extracts to <skill-name>/SKILL.md so it can be dropped straight into
-# ~/.claude/skills/ (or a project's .claude/skills/) or handed to any harness
-# that understands the Agent Skills format. Repo-only cruft is excluded so the
+# any agent's skills directory (for example ~/.claude/skills/) or handed to any
+# harness that understands the Agent Skills format. Repo-only cruft is excluded so the
 # artifact is clean.
 #
 # Output: dist/<skill-name>.zip for every skill, plus dist/SHA256SUMS.txt.

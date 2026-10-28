@@ -35,10 +35,13 @@ jobs:
           python-version: "3.x"
 
       - name: Install dependencies
-        run: pip install pyyaml
+        run: pip install pyyaml jsonschema
 
       - name: Validate skills
         run: python3 .github/scripts/validate-skills.py
+
+      - name: Validate manifests
+        run: python3 .github/scripts/validate-manifests.py
 
       - name: Package skills
         run: bash .github/scripts/package-skills.sh
@@ -71,5 +74,5 @@ jobs:
             echo "Creating release $TAG."
             gh release create "$TAG" "${assets[@]}" \
               --title "Skyflow skills $TAG" \
-              --notes "Portable Skyflow skill packages. Download a skill's \`.zip\`, unzip it into \`~/.claude/skills/\` (or a project's \`.claude/skills/\`) or any Agent Skills-compatible harness. Verify downloads against \`SHA256SUMS.txt\`."
+              --notes "Portable Skyflow skill packages in the Agent Skills format. Download a skill's \`.zip\` and unzip it into your agent's skills directory (for example \`~/.claude/skills/\` for Claude Code). Verify downloads against \`SHA256SUMS.txt\`."
           fi

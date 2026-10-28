@@ -1,13 +1,17 @@
 name: Validate skills
 
 # Lightweight check: every skill under skyflow-skills-plugin/skills/ must have a
-# valid SKILL.md before it can be merged or packaged. No artifacts are produced.
+# valid SKILL.md, and the per-host plugin and marketplace manifests must be valid
+# and in sync, before anything can be merged or packaged. No artifacts are produced.
 
 on:
   pull_request:
     paths:
-      - "skyflow-skills-plugin/skills/**"
-      - ".github/scripts/validate-skills.py"
+      - "skyflow-skills-plugin/**"
+      - ".claude-plugin/**"
+      - ".cursor-plugin/**"
+      - ".github/schemas/**"
+      - ".github/scripts/validate-*.py"
       - ".github/workflows/validate-skills.yml"
   workflow_dispatch:
 
@@ -23,6 +27,8 @@ jobs:
         with:
           python-version: "3.x"
       - name: Install dependencies
-        run: pip install pyyaml
+        run: pip install pyyaml jsonschema
       - name: Validate skill frontmatter
         run: python3 .github/scripts/validate-skills.py
+      - name: Validate plugin and marketplace manifests
+        run: python3 .github/scripts/validate-manifests.py
