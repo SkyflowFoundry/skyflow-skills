@@ -48,11 +48,15 @@ Full detail, per-environment cautions, and how to find each ID → [environments
 
 The quickest credential to start with is a **personal access / API bearer token** from Studio: **top-right profile (account) menu → Generate API Bearer Token**.
 
-**Never ask the user to paste the token into the chat.** Tokens are secrets — in a shared or logged session, and especially in sandbox/production, a pasted token is a leaked token. Instead, have them place it in the environment and read it from there:
+**Never ask the user to paste the token into the chat.** Tokens are secrets — in a shared or logged session, and especially in sandbox/production, a pasted token is a leaked token. Instead, have them place it in the environment and read it from there.
+
+**If the agent runs on a hosted or cloud machine** (not the user's own computer), use the host's secret store — for example a secure secret field or a secrets setting — so the token reaches the agent as an environment variable without ever appearing in the chat. Use the same variable names as below.
+
+**If the agent runs on the user's own computer**, use a shell profile:
 
 ```bash
 # Add to your shell profile (e.g. ~/.zshrc), then restart the terminal.
-# These names match the Skyflow MCP plugins, so setting them once wires those up too.
+# If you also use a Skyflow MCP server plugin, it reads these same names.
 export SKYFLOW_BEARER_TOKEN="your-token-here"
 export SKYFLOW_ACCOUNT_ID="your-account-id-here"
 ```
@@ -119,14 +123,16 @@ Match the goal to the skill and load it. All skills below ship in this same `sky
 
 **Typical first-timer path:** explore → `plan-skyflow-implementation` → `create-vault` → a quickstart (`quickstart-node` or `quickstart-js-browser`) → `call-rest-apis` as you build.
 
-### Companion MCP plugins (optional)
+### Companion MCP plugins (optional, Claude Code only for now)
 
-The skills work standalone. For live access, pair with:
+The skills work standalone in any agent that supports Agent Skills. In Claude Code you can also pair them with Skyflow MCP servers for live access:
 
 - **skyflow-developer-mcp** — Skyflow docs, skills, and integration resources on demand. Most users want this. Reads `SKYFLOW_BEARER_TOKEN` and `SKYFLOW_ACCOUNT_ID` (the same vars from Step 2).
 - **skyflow-runtime-mcp** — on-demand de-identification of PII in text via the Detect APIs. Add only if you need it.
 
-Install: `/plugin marketplace add SkyflowFoundry/claude` then `/plugin install skyflow-developer-mcp@skyflow-marketplace`.
+Install in Claude Code: `/plugin marketplace add SkyflowFoundry/claude` then `/plugin install skyflow-developer-mcp@skyflow-marketplace`.
+
+In other agents (Cursor, Grok Bot, and others) these MCP plugins are not published yet — don't offer them there. Use the **call-rest-apis** skill for API access instead.
 
 ---
 
@@ -141,5 +147,5 @@ Install: `/plugin marketplace add SkyflowFoundry/claude` then `/plugin install s
 ## Related documentation
 
 - [environments.md](environments.md) — account types, base URLs, finding your IDs, per-environment guidance
-- [credentials.md](credentials.md) — token types, secure local setup, what never to do
+- [credentials.md](credentials.md) — token types, secure setup on a local or hosted agent, what never to do
 - Skyflow docs: <https://docs.skyflow.com> · API authentication: <https://docs.skyflow.com/docs/fundamentals/api-authentication>

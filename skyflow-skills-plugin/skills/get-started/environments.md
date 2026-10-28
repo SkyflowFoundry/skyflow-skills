@@ -37,7 +37,7 @@ In Studio, open a vault and click the **vault menu icon → View vault details**
 - **Account ID** — sent as the `X-SKYFLOW-ACCOUNT-ID` header on many Management calls
 - **Workspace ID** — needed when creating vaults
 
-Suggested environment variables for local work (these names line up with the Skyflow MCP plugins):
+Suggested environment variables (these names line up with the Skyflow MCP plugins). On a hosted agent, put `SKYFLOW_BEARER_TOKEN` in the host's secret store instead of exporting it — see [credentials.md](credentials.md):
 
 ```bash
 export MANAGEMENT_URL=https://manage.skyflowapis.com   # or ...-preview.com for sandbox

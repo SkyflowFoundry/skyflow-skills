@@ -1,0 +1,18 @@
+{
+  "name": "skyflow-skills-marketplace",
+  "owner": {
+    "name": "Skyflow"
+  },
+  "metadata": {
+    "description": "Skyflow skills for Cursor and Grok Bot — skills only, no MCP servers.",
+    "version": "0.7.0"
+  },
+  "plugins": [
+    {
+      "name": "skyflow-skills",
+      "source": "./skyflow-skills-plugin",
+      "description": "Skyflow skills for AI agents: getting started, vault creation, REST API guidance, SDK migration, implementation planning, and SDK quickstarts.",
+      "logo": "assets/logo.svg"
+    }
+  ]
+}

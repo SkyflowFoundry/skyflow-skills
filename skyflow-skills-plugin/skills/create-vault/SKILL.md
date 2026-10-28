@@ -1,6 +1,6 @@
 ---
 name: create-vault
-description: Create Skyflow vaults programmatically using the Management API, including schema design, template selection, and configuration of tokenization, redaction, and compliance settings.
+description: Create Skyflow vaults programmatically using the Management API, including schema design, template selection, and configuration of tokenization, redaction, and compliance settings. Use when creating, designing, or updating a Skyflow vault or vault schema, choosing a vault template, or configuring field tags for tokenization, redaction, validation, or compliance.
 ---
 
 # Create a Skyflow Vault

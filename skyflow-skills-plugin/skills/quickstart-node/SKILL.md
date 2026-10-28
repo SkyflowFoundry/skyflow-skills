@@ -1,6 +1,6 @@
 ---
 name: quickstart-node
-description: A quickstart guide for setting up a Node.js project with the skyflow-node SDK.
+description: A quickstart guide for setting up a Node.js project with the skyflow-node SDK. Use when starting a new Node.js or TypeScript backend that talks to Skyflow, or when adding the skyflow-node SDK to a project for the first time.
 ---
 
 # Quickstart: Node.js with skyflow-node

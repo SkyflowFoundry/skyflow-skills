@@ -3,8 +3,9 @@
 
 Each skill under skyflow-skills-plugin/skills/<name>/ must contain a SKILL.md
 with YAML frontmatter whose `name` matches the directory and whose
-`description` is present. Rules mirror the Agent Skills spec so that every
-published zip is a valid, portable skill.
+`description` is present. Optional fields must be ones the spec defines.
+Rules mirror the Agent Skills spec (https://agentskills.io/specification) so
+that every skill stays portable across agent hosts.
 
 Exit code 0 = all valid, 1 = one or more problems (details printed).
 """
@@ -22,6 +23,10 @@ FRONTMATTER_RE = re.compile(r"^---\r?\n(.*?)\r?\n---\r?\n", re.DOTALL)
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 NAME_MAX = 64
 DESC_MAX = 1024
+COMPATIBILITY_MAX = 500
+# Every frontmatter field the Agent Skills spec defines. Host-specific fields
+# would make a skill non-portable, so anything else is rejected.
+ALLOWED_FIELDS = {"name", "description", "license", "compatibility", "metadata", "allowed-tools"}
 
 
 def parse_frontmatter(text: str) -> dict | None:
@@ -73,6 +78,31 @@ def validate_skill(skill_dir: Path) -> list[str]:
         errors.append(
             f"{skill_dir.name}: description exceeds {DESC_MAX} chars ({len(desc)})"
         )
+
+    unknown = sorted(set(fm) - ALLOWED_FIELDS)
+    if unknown:
+        errors.append(
+            f"{skill_dir.name}: frontmatter has fields outside the Agent Skills spec: {', '.join(unknown)}"
+        )
+
+    compat = fm.get("compatibility")
+    if compat is not None and (
+        not isinstance(compat, str) or not compat.strip() or len(compat) > COMPATIBILITY_MAX
+    ):
+        errors.append(
+            f"{skill_dir.name}: `compatibility` must be 1-{COMPATIBILITY_MAX} chars"
+        )
+
+    meta = fm.get("metadata")
+    if meta is not None and not (
+        isinstance(meta, dict)
+        and all(isinstance(k, str) and isinstance(v, str) for k, v in meta.items())
+    ):
+        errors.append(f"{skill_dir.name}: `metadata` must map strings to strings")
+
+    allowed_tools = fm.get("allowed-tools")
+    if allowed_tools is not None and not isinstance(allowed_tools, str):
+        errors.append(f"{skill_dir.name}: `allowed-tools` must be a space-separated string")
 
     return errors
 

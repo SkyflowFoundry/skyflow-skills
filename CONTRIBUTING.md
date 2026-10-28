@@ -1,21 +1,31 @@
-# Contributing to Skyflow Skills for Claude Code
+# Contributing to Skyflow Skills
 
 This guide is for developers who want to contribute to or extend the Skyflow skills.
 
 ## Repository Structure
 
-This repository is a Claude Code plugin marketplace that publishes a single, skills-only plugin:
+This repository publishes a single, skills-only plugin to several agent hosts from one source of truth. Each host reads its own manifest, and every manifest points at the same `skills/` directory:
 
 ```
 /
-├── README.md                             # Marketplace overview
+├── README.md                             # Repo overview and per-host install steps
 ├── .claude-plugin/
-│   └── marketplace.json                  # Marketplace configuration (lists the skyflow-skills plugin)
+│   └── marketplace.json                  # Claude Code marketplace (lists the skyflow-skills plugin)
+├── .cursor-plugin/
+│   └── marketplace.json                  # Cursor and Grok Bot marketplace (lists the skyflow-skills plugin)
+├── .github/
+│   ├── schemas/                          # Vendored Agent Plugins schema used by CI
+│   ├── scripts/                          # Validators and the skill packager
+│   └── workflows/                        # CI
 └── skyflow-skills-plugin/                # Skills plugin (no MCP servers)
+    ├── plugin.json                       # Agent Plugins 1.0.0 manifest (vendor-neutral, used by Cursor and Grok Bot)
     ├── .claude-plugin/
-    │   └── plugin.json                   # Plugin metadata
+    │   └── plugin.json                   # Claude Code manifest
     ├── README.md                         # Plugin docs
-    └── skills/                           # Agent skills
+    ├── assets/
+    │   ├── logo.svg                      # Square logo (referenced by the Cursor marketplace entry)
+    │   └── logo.png                      # 1024 × 1024 PNG export of logo.svg for hosts and forms that need a raster image
+    └── skills/                           # Agent Skills
         ├── call-rest-apis/
         │   └── SKILL.md
         ├── create-vault/
@@ -32,32 +42,41 @@ This repository is a Claude Code plugin marketplace that publishes a single, ski
             └── SKILL.md
 ```
 
-This marketplace contains skills only. The Skyflow MCP server plugins are maintained separately in the [`SkyflowFoundry/claude`](https://github.com/SkyflowFoundry/claude) marketplace so that skills and MCP servers can be reviewed, authorized, and versioned independently.
+This repo contains skills only. The Skyflow MCP server plugins for Claude Code are maintained separately in the [`SkyflowFoundry/claude`](https://github.com/SkyflowFoundry/claude) marketplace so that skills and MCP servers can be reviewed, authorized, and versioned independently.
 
-## Marketplace Configuration
+## Standards
 
-The `.claude-plugin/marketplace.json` file at the root defines the marketplace and lists available plugins:
+The repo follows two open standards wherever a host allows it:
 
-- `name`: The marketplace identifier (`skyflow-skills-marketplace`). This must be distinct from the `skyflow-marketplace` in `SkyflowFoundry/claude`, because Claude Code registers only one marketplace per name.
-- `owner`: Marketplace owner information
-- `plugins`: Array of plugin definitions with name, source path, and description. This marketplace lists a single plugin: `skyflow-skills`.
+1. **[Agent Skills](https://agentskills.io/specification)** governs every `SKILL.md`. Frontmatter may only use the fields that spec defines (`name`, `description`, `license`, `compatibility`, `metadata`, `allowed-tools`).
+2. **[Agent Plugins 1.0.0](https://agent-plugins.org/specification)** governs `skyflow-skills-plugin/plugin.json`. Its schema is closed, so host-specific fields such as a logo or display name belong in that host's own manifest or marketplace entry instead.
 
-A plugin's `name` must match the `name` in its own `.claude-plugin/plugin.json`, and `source` is a path relative to the repository root (e.g. `./skyflow-skills-plugin`).
+Skill text must not assume a particular host. Refer to "the agent" rather than a product name, and when a step depends on where the agent runs (for example a local shell profile versus a hosted machine) cover both cases.
 
-## Plugin Structure
+## Manifests
 
-The `skyflow-skills-plugin/` directory is a standard skills plugin:
+| File | Host | Notes |
+| ---- | ---- | ----- |
+| `skyflow-skills-plugin/plugin.json` | Agent Plugins hosts, Cursor, Grok Bot | Source of truth for `name`, `version`, `description`, `author`, and `license` |
+| `skyflow-skills-plugin/.claude-plugin/plugin.json` | Claude Code | Must match the fields above |
+| `.claude-plugin/marketplace.json` | Claude Code | `name` is `skyflow-skills-marketplace`. It must stay distinct from the `skyflow-marketplace` in `SkyflowFoundry/claude` because Claude Code registers only one marketplace per name. |
+| `.cursor-plugin/marketplace.json` | Cursor, Grok Bot | Lets the hosts find the plugin in its subdirectory when you paste the repo link. Its entry also carries the `logo` because the Agent Plugins schema has no logo field. The path is relative to the plugin directory. |
 
-- `.claude-plugin/plugin.json`: Plugin metadata (name, version, author, description)
-- `skills/`: Agent skills, each in its own directory with a `SKILL.md` file
+In both marketplace files, each plugin entry's `name` must match the plugin manifest, `source` is a path relative to the repository root (`./skyflow-skills-plugin`), and `description` must match the plugin manifest. CI enforces all of this with `.github/scripts/validate-manifests.py`.
 
-Each plugin also carries its own `README.md` at its root documenting installation; the root [README.md](README.md) is a marketplace overview that links to it.
+Each plugin also carries its own `README.md` at its root documenting installation; the root [README.md](README.md) is an overview that links to it.
 
-A plugin only requires `.claude-plugin/plugin.json`. (`commands/`, `agents/`, and `hooks/` are also supported by Claude Code but are not currently used in this repo.)
+### Logo
+
+`skyflow-skills-plugin/assets/logo.svg` is the official white Skyflow wordmark from the brand kit centered on a `#403E6B` square plate. If you change it, re-export the PNG so the two stay identical:
+
+```sh
+magick -background none -density 288 skyflow-skills-plugin/assets/logo.svg -resize 1024x1024 -depth 8 -strip skyflow-skills-plugin/assets/logo.png
+```
 
 ## Adding New Skills
 
-Skills are guided workflows that help Claude assist users with Skyflow tasks. They provide structured documentation, examples, and references that Claude can use when helping users implement features.
+Skills are guided workflows that help an agent assist users with Skyflow tasks. They provide structured documentation, examples, and references that the agent can use when helping users implement features.
 
 ### Skill Directory Structure
 
@@ -155,19 +174,19 @@ After creating a new skill, add it to the Skills section in the plugin [README.m
 
 Skills are distributed two ways from a single source of truth (the directories under `skyflow-skills-plugin/skills/`):
 
-1. **Plugin** — installed via the marketplace (`/plugin install skyflow-skills@skyflow-skills-marketplace`).
+1. **Plugin** — installed through each host's marketplace or plugin settings (see the [README](README.md#supported-hosts)).
 2. **Standalone zips** — one portable `.zip` per skill, published as GitHub Release assets for use in other projects or harnesses.
 
 The zips are build artifacts. They are **not** committed to the repo (`dist/` is gitignored), so the plugin/marketplace install is never affected.
 
 ### CI workflows
 
-- **`.github/workflows/validate-skills.yml`** — runs on pull requests that touch skills. It checks every `SKILL.md` has valid frontmatter (`name` matches the directory, lowercase-hyphen, ≤64 chars; `description` present, ≤1024 chars).
+- **`.github/workflows/validate-skills.yml`** — runs on pull requests that touch the plugin, the manifests, or the validators. It checks every `SKILL.md` has valid Agent Skills frontmatter (`name` matches the directory, lowercase-hyphen, ≤64 chars; `description` present, ≤1024 chars; no fields outside the spec). It also validates `plugin.json` against the Agent Plugins schema and checks that every manifest agrees on name, version, description, author, and license.
 - **`.github/workflows/package-skills.yml`** — runs on a pushed version tag (`v*`) or manual dispatch. It validates, zips each skill into `dist/<skill>.zip`, generates `dist/SHA256SUMS.txt`, and attaches everything to the matching GitHub Release.
 
 ### Cutting a release
 
-1. Bump `version` in `skyflow-skills-plugin/.claude-plugin/plugin.json`.
+1. Bump `version` in `skyflow-skills-plugin/plugin.json`, `skyflow-skills-plugin/.claude-plugin/plugin.json`, and `metadata.version` in `.cursor-plugin/marketplace.json`. CI fails if they disagree.
 2. Tag and push: `git tag v0.6.0 && git push origin v0.6.0`. The package workflow creates the release and uploads the zips automatically.
 
 Alternatively, trigger the **Package skills** workflow manually (Actions tab → *Run workflow*); it defaults the tag to `v<plugin.json version>`.
@@ -175,10 +194,15 @@ Alternatively, trigger the **Package skills** workflow manually (Actions tab →
 ### Building locally
 
 ```sh
-python3 .github/scripts/validate-skills.py   # validate frontmatter
-bash   .github/scripts/package-skills.sh      # build dist/*.zip + SHA256SUMS.txt
+pip install pyyaml jsonschema
+python3 .github/scripts/validate-skills.py      # validate skill frontmatter
+python3 .github/scripts/validate-manifests.py   # validate and cross-check manifests
+bash    .github/scripts/package-skills.sh        # build dist/*.zip + SHA256SUMS.txt
 ```
 
 ## Learn More
 
-For complete documentation on Claude Code plugins, see the [Claude Code Plugins documentation](https://code.claude.com/docs/en/plugins).
+- [Agent Skills specification](https://agentskills.io/specification)
+- [Agent Plugins specification](https://agent-plugins.org/specification)
+- [Claude Code plugins documentation](https://code.claude.com/docs/en/plugins)
+- [Cursor plugins documentation](https://cursor.com/docs/plugins)
