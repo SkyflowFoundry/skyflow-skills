@@ -63,6 +63,10 @@ def check_marketplace(path: Path, plugin: dict, errors: list[str]) -> None:
         errors.append(f"{path}: `{plugin['name']}` source must be `./{PLUGIN_DIR}`")
     if entry.get("description") != plugin.get("description"):
         errors.append(f"{path}: `{plugin['name']}` description differs from {AGENT_PLUGIN}")
+    logo = entry.get("logo")
+    if isinstance(logo, str) and not logo.startswith(("http://", "https://")):
+        if not (PLUGIN_DIR / logo).is_file():
+            errors.append(f"{path}: `{plugin['name']}` logo `{logo}` not found under {PLUGIN_DIR}")
     version = market.get("metadata", {}).get("version")
     if version is not None and version != plugin.get("version"):
         errors.append(f"{path}: metadata.version `{version}` differs from {AGENT_PLUGIN}")

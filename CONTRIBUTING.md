@@ -22,6 +22,9 @@ This repository publishes a single, skills-only plugin to several agent hosts fr
     ├── .claude-plugin/
     │   └── plugin.json                   # Claude Code manifest
     ├── README.md                         # Plugin docs
+    ├── assets/
+    │   ├── logo.svg                      # Square logo (referenced by the Cursor marketplace entry)
+    │   └── logo.png                      # 1024 × 1024 PNG export of logo.svg for hosts and forms that need a raster image
     └── skills/                           # Agent Skills
         ├── call-rest-apis/
         │   └── SKILL.md
@@ -57,11 +60,19 @@ Skill text must not assume a particular host. Refer to "the agent" rather than a
 | `skyflow-skills-plugin/plugin.json` | Agent Plugins hosts, Cursor, Grok Bot | Source of truth for `name`, `version`, `description`, `author`, and `license` |
 | `skyflow-skills-plugin/.claude-plugin/plugin.json` | Claude Code | Must match the fields above |
 | `.claude-plugin/marketplace.json` | Claude Code | `name` is `skyflow-skills-marketplace`. It must stay distinct from the `skyflow-marketplace` in `SkyflowFoundry/claude` because Claude Code registers only one marketplace per name. |
-| `.cursor-plugin/marketplace.json` | Cursor, Grok Bot | Lets the hosts find the plugin in its subdirectory when you paste the repo link |
+| `.cursor-plugin/marketplace.json` | Cursor, Grok Bot | Lets the hosts find the plugin in its subdirectory when you paste the repo link. Its entry also carries the `logo` because the Agent Plugins schema has no logo field. The path is relative to the plugin directory. |
 
 In both marketplace files, each plugin entry's `name` must match the plugin manifest, `source` is a path relative to the repository root (`./skyflow-skills-plugin`), and `description` must match the plugin manifest. CI enforces all of this with `.github/scripts/validate-manifests.py`.
 
 Each plugin also carries its own `README.md` at its root documenting installation; the root [README.md](README.md) is an overview that links to it.
+
+### Logo
+
+`skyflow-skills-plugin/assets/logo.svg` is the official white Skyflow wordmark from the brand kit centered on a `#403E6B` square plate. If you change it, re-export the PNG so the two stay identical:
+
+```sh
+magick -background none -density 288 skyflow-skills-plugin/assets/logo.svg -resize 1024x1024 -depth 8 -strip skyflow-skills-plugin/assets/logo.png
+```
 
 ## Adding New Skills
 
