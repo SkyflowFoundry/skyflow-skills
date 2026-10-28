@@ -1,6 +1,6 @@
 ---
 name: migrate-sdk-v1-to-v2
-description: Guide migration from Skyflow V1 SDKs to V2, covering authentication changes, client initialization, request/response structures, and SDK-specific patterns.
+description: Guide migration from Skyflow V1 SDKs to V2, covering authentication changes, client initialization, request/response structures, and SDK-specific patterns. Use when upgrading existing code that uses a V1 Skyflow SDK for Node.js, Python, Java, or Go, or when fixing breakages after a V2 upgrade.
 ---
 
 # Migrate Skyflow SDK from V1 to V2
@@ -271,7 +271,7 @@ const token = response.insertedFields[0].email;
 - [templates/migration-checklist.md](templates/migration-checklist.md) - Migration tracking template
 - [templates/code-inventory.md](templates/code-inventory.md) - V1 usage discovery template
 
-## Usage Instructions for Claude
+## Usage Instructions for the Agent
 
 When helping users migrate from V1 to V2:
 

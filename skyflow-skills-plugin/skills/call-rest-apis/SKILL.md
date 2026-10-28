@@ -1,6 +1,6 @@
 ---
 name: call-rest-apis
-description: Call the Skyflow REST APIs - including management APIs, data APIs, and detect APIs.
+description: Call the Skyflow REST APIs - including management APIs, data APIs, and detect APIs. Use when making direct HTTP or curl calls to Skyflow, looking up an endpoint, request body, or response shape, authenticating with a bearer token, API key, or service account, or de-identifying text with the Detect API.
 ---
 
 # Skyflow REST APIs

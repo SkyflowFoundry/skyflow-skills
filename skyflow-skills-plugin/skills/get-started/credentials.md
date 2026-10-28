@@ -34,9 +34,13 @@ Because these tokens expire (~60 min), you'll regenerate periodically during dev
 
 ## Provide the token securely (pick one)
 
-### Option 1 — Shell environment variable (recommended for local dev)
+### Option 1 — The agent host's secret store (hosted or cloud agents)
 
-Add to your shell profile (e.g. `~/.zshrc` on macOS), then **restart the terminal**. These names match the Skyflow MCP plugins, so setting them here also wires those up:
+Some agents run on a hosted or cloud machine rather than the user's own computer. Those hosts usually offer a secure way to store secrets — a secret field, a secrets setting, or similar — that injects the value as an environment variable. Use it with the names `SKYFLOW_BEARER_TOKEN` and `SKYFLOW_ACCOUNT_ID`, and have the user enter the value there themselves. Don't append secrets to a shell profile on a hosted machine.
+
+### Option 2 — Shell environment variable (recommended for local dev)
+
+Add to your shell profile (e.g. `~/.zshrc` on macOS), then **restart the terminal**. If you also use a Skyflow MCP server plugin, it reads these same names:
 
 ```bash
 echo 'export SKYFLOW_BEARER_TOKEN="your-token-here"' >> ~/.zshrc
@@ -49,7 +53,7 @@ Verify **without printing the secret**:
 [ -n "$SKYFLOW_BEARER_TOKEN" ] && echo "SKYFLOW_BEARER_TOKEN is set" || echo "SKYFLOW_BEARER_TOKEN is NOT set"
 ```
 
-### Option 2 — Gitignored `.env` file (project-local)
+### Option 3 — Gitignored `.env` file (project-local)
 
 1. Confirm `.env` is in `.gitignore` **before** creating it:
    ```bash
@@ -62,7 +66,7 @@ Verify **without printing the secret**:
    ```
 3. Load it with your framework's env loader (`dotenv`, Vite's `import.meta.env`, etc.). Never hardcode the token in source.
 
-### Option 3 — Secrets manager (production)
+### Option 4 — Secrets manager (production)
 
 Store credentials in a secrets manager (AWS Secrets Manager, GCP Secret Manager, Vault, etc.) and inject them at runtime. Use a **service account** to generate short-lived bearer tokens on the backend — the raw credentials never reach a frontend or a developer's laptop.
 
@@ -81,7 +85,7 @@ Browser/mobile SDKs must **never** hold a service account or long-lived key. The
 
 ## Checklist
 
-- [ ] Token stored in an env var, gitignored `.env`, or secrets manager — never in the chat
+- [ ] Token stored in the agent host's secret store, an env var, a gitignored `.env`, or a secrets manager — never in the chat
 - [ ] `.env` is in `.gitignore` (if using a file)
 - [ ] Token matches the target environment (trial/sandbox/production)
 - [ ] Production uses a service account or least-privilege API key, not a personal token

@@ -1,6 +1,6 @@
 ---
 name: plan-skyflow-implementation
-description: Guide users through planning a complete Skyflow implementation, from requirements assessment through production launch, using the Define-Build-Go Live framework.
+description: Guide users through planning a complete Skyflow implementation, from requirements assessment through production launch, using the Define-Build-Go Live framework. Use when scoping or designing a Skyflow integration, building a data inventory, choosing a tokenization or auth approach, or preparing a security review or production launch.
 ---
 
 # Plan Your Skyflow Implementation
@@ -339,7 +339,7 @@ Week 6-7: Go Live Phase
 - [templates/implementation-plan.md](templates/implementation-plan.md) - Plan template
 - [templates/data-inventory.md](templates/data-inventory.md) - Data assessment worksheet
 
-## Usage Instructions for Claude
+## Usage Instructions for the Agent
 
 When helping users plan their Skyflow implementation:
 
@@ -353,5 +353,5 @@ When helping users plan their Skyflow implementation:
 ### Key Integrations
 
 - Use the **create-vault** skill when ready to create the vault schema
-- Use the **rest-apis** skill for API-specific questions during build phase
+- Use the **call-rest-apis** skill for API-specific questions during build phase
 - Reference Skyflow documentation for latest SDK guides and API references

@@ -361,7 +361,11 @@ Start the dev server:
 npm run dev
 ```
 
-Open `http://localhost:5173` in your browser and verify:
+Open `http://localhost:5173` in your browser and verify the steps below.
+
+> **Hosted agents:** If the agent runs on a remote or cloud machine then the dev server runs there too and `localhost` on the user's own computer will not reach it. Open the page in the agent's own browser if it has one. Otherwise tell the user to run `npm run dev` on their own machine.
+
+Verify:
 
 1. **Elements render** — you should see four input fields, not blank space. If fields are invisible, check that `.skyflow-element` has a height set.
 2. **Console shows READY events** — open DevTools and look for `[Skyflow] Element #field-N ready` messages for each field. These confirm the iframes loaded and connected to your vault.
