@@ -1,0 +1,19 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "skyflow-skills",
+  "version": "0.7.0",
+  "description": "Skyflow skills for AI agents: getting started, vault creation, REST API guidance, SDK migration, implementation planning, and SDK quickstarts.",
+  "author": {
+    "name": "Skyflow",
+    "url": "https://www.skyflow.com"
+  },
+  "homepage": "https://github.com/SkyflowFoundry/skyflow-skills",
+  "repository": "https://github.com/SkyflowFoundry/skyflow-skills",
+  "license": "MIT",
+  "keywords": [
+    "skyflow",
+    "skyflow-vault",
+    "skyflow-detect",
+    "skyflow-sdk"
+  ]
+}
