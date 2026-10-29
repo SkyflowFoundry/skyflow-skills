@@ -62,6 +62,8 @@ The Define phase establishes your foundation. See [define-phase.md](define-phase
 
 #### Data Inventory Checklist
 
+If the user has a codebase, run the **inventory-sensitive-data** skill first to fill most of this checklist from the code.
+
 - [ ] List all PII/PHI/PCI data fields you collect
 - [ ] Map data sources (forms, APIs, imports, third parties)
 - [ ] Map data destinations (storage, analytics, third parties)

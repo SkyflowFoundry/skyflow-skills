@@ -8,7 +8,7 @@
     {
       "name": "skyflow-skills",
       "source": "./skyflow-skills-plugin",
-      "description": "Skyflow skills for AI agents: getting started, vault creation, REST API guidance, SDK migration, implementation planning, and SDK quickstarts."
+      "description": "Skyflow skills for AI agents: sensitive data inventory, getting started, vault creation, REST API guidance, SDK migration, implementation planning, and SDK quickstarts."
     }
   ]
 }
