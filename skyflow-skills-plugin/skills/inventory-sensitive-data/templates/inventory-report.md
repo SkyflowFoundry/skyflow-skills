@@ -105,4 +105,16 @@ Complete this part only if the user wants to plan a Skyflow implementation. The 
 | Part 2 findings with sinks outside the system | Part 5 (Data Destinations) |
 | Part 4 regulatory scope | Part 7 (Compliance Requirements) |
 
+The worksheet groups fields into four categories. Map this report's categories onto them as follows.
+
+| This report's category | Worksheet category |
+| ---------------------- | ------------------ |
+| Identity, Contact, Government ID, Location and device, Special category, Children's data | PII |
+| Health | PHI |
+| Payment card | PCI |
+| Financial | NPI |
+| Credentials and secrets | Leave out. Secrets belong in a secrets manager and not in a vault schema. |
+
+Where the worksheet asks for examples, use format examples such as `name@example.com` and never values found in the code.
+
 The worksheet's Part 6 (Data Access) needs input from the user about roles, because the code rarely shows who should see what.

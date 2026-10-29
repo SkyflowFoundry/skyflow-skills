@@ -24,7 +24,7 @@ The skill works without a Skyflow account and without any network access. It onl
 ## Prerequisites
 
 1. A workspace that contains the code, schemas, or pipeline definitions to review. If there is no code, the user can describe the system and you can run the same steps as an interview.
-2. A way to search files. Prefer `rg` (ripgrep) and fall back to `grep -rEn` when it is not installed.
+2. A way to search files. Prefer `rg` (ripgrep) and fall back to `grep -rEn` when it is not installed. The value patterns need small changes for `grep`, which [discovery-patterns.md](discovery-patterns.md#posix-forms-for-git-and-grep) explains.
 
 No account, credentials, or environment variables are needed.
 
@@ -32,7 +32,7 @@ No account, credentials, or environment variables are needed.
 
 Apply these throughout the review.
 
-1. **Stay read-only.** Do not change code, configuration, or data until the user approves a specific fix.
+1. **Stay read-only.** Do not change code, configuration, or data until the user approves a specific fix. The only file you may write is the report, and only in a place the user agrees to.
 2. **Never copy sensitive values.** Cite the file, line, and field name instead. If you find real-looking personal data or a secret, describe its type and location and do not repeat the value in the chat or the report. Read `.env` files, fixtures, and value matches with the masking commands in [discovery-patterns.md](discovery-patterns.md#reading-sensitive-files-safely) so the values never reach your own tool output either.
 3. **Report secrets by location only.** A committed API key or private key is a finding on its own. Recommend rotating it because removing it from the latest commit does not remove it from git history.
 4. **Do not move data to scan it.** Do not run the application, query production databases, or send code or data to an outside service as part of the review. Sample a database only if the user asks and only against non-production data.
@@ -138,7 +138,12 @@ For each finding, work down this ladder and stop at the first step that solves t
 
 ## Step 6: Write the report
 
-Fill in [templates/inventory-report.md](templates/inventory-report.md). Ask the user where to save it and suggest `docs/sensitive-data-inventory.md`. Do not commit it unless the user asks.
+Fill in [templates/inventory-report.md](templates/inventory-report.md). Ask the user whether they want the report in the chat or saved to a file.
+
+1. **In the chat** is the safer default when you run on a hosted or cloud machine, because files there are lost when the session ends unless the user downloads them.
+2. **As a file** works best outside the repository, such as a folder in the user's home directory. The report is a map of where sensitive data and secrets live, so it should not sit in a repository that others can read.
+
+Never commit the report to a public repository. Commit it to a private one only if the user asks.
 
 The report must list the scope and what was skipped. Each finding needs a file and line and a recommendation. Lead the summary with the three to five findings that matter most.
 

@@ -10,7 +10,7 @@ For every Restricted or Confidential field, search for the field name next to th
 | ---- | ------------ | -------------- |
 | Application logs | `console.log(user)`, `logger.info(req.body)`, `print(record)`, `log.Printf("%+v", u)`, `JSON.stringify(req.body)` inside a log call, f-strings that include a field | Logs are copied to many tools, kept for a long time, and readable by most engineers |
 | Request logging middleware | `morgan`, `pino-http`, `express-winston`, Django `LOGGING` with request bodies, Rails `filter_parameters` that is missing fields | Logs every request body or URL without anyone choosing to |
-| SQL and ORM query logging | Sequelize `logging: true`, SQLAlchemy `echo=True`, Prisma `log: ['query']`, Hibernate `show_sql` | Logs bound parameter values in plaintext |
+| SQL and ORM query logging with parameter values | SQLAlchemy `echo=True`, Sequelize `logQueryParameters: true`, Hibernate TRACE logging on `org.hibernate.orm.jdbc.bind` (Hibernate 6) or `org.hibernate.type.descriptor.sql` (Hibernate 5), Prisma query event handlers that log `params`, Django `django.db.backends` logging at `DEBUG` | Logs bound parameter values in plaintext. Plain query logging such as Hibernate `show_sql` prints `?` placeholders and is a lower risk. |
 | URLs and query strings | Routes such as `/users/:email`, `GET` forms, redirects that carry fields in the query string | URLs land in access logs, browser history, proxies, and `Referer` headers |
 | Debug mode | Django `DEBUG = True`, verbose error pages, stack traces returned to clients, SDK options such as `debug: true` or a development environment flag left on in production config, log level `DEBUG` in production | Error pages and debug logs can show request data and local variables |
 
