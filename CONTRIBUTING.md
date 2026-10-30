@@ -32,6 +32,8 @@ This repository publishes a single, skills-only plugin to several agent hosts fr
         │   └── SKILL.md
         ├── get-started/
         │   └── SKILL.md
+        ├── inventory-sensitive-data/
+        │   └── SKILL.md
         ├── migrate-sdk-v1-to-v2/
         │   └── SKILL.md
         ├── plan-skyflow-implementation/

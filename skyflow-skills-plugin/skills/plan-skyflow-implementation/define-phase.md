@@ -10,6 +10,8 @@ Before designing your vault, thoroughly understand your data landscape:
 
 #### Step 1: Inventory Sensitive Data
 
+If the user has a codebase, run the **inventory-sensitive-data** skill first. It finds the sensitive fields and data flows in the code and maps its report onto this worksheet.
+
 Use the [data inventory worksheet](templates/data-inventory.md) to document:
 
 | Field Name | Data Type | Example | Source | Destination | Compliance |

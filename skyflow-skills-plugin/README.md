@@ -39,6 +39,7 @@ The agent invokes the relevant skill automatically when it fits what you're work
 | Skill | Claude Code slash command |
 | ----- | ------------------------- |
 | Get Started with Skyflow | `/skyflow-skills:get-started` |
+| Inventory Sensitive Data | `/skyflow-skills:inventory-sensitive-data` |
 | Plan Skyflow Implementation | `/skyflow-skills:plan-skyflow-implementation` |
 | Create Vault | `/skyflow-skills:create-vault` |
 | Call REST APIs | `/skyflow-skills:call-rest-apis` |
@@ -51,6 +52,12 @@ The agent invokes the relevant skill automatically when it fits what you're work
 **Claude Code slash command:** `/skyflow-skills:get-started`
 
 The **get-started** skill is the front door for a new Skyflow integration or POC. It orients new users and agents, then hands off to the right skill. It walks through four quick decisions — checking whether you have an account and whether it's a trial, sandbox, or production account (which drives the base URLs and how carefully to handle data), getting an API bearer token into your environment securely (never into the chat or logs), clarifying your goal (explore, plan, POC, or production-ready), and picking a working mode (educational/collaborative or get-it-done) — then routes you to the appropriate skill, API, SDK, and docs. Supporting references cover the account-type/base-URL matrix and secure credential setup.
+
+### Inventory Sensitive Data
+
+**Claude Code slash command:** `/skyflow-skills:inventory-sensitive-data`
+
+The **inventory-sensitive-data** skill finds the sensitive data in a codebase, schema, or AI pipeline and shows where it goes. It needs no Skyflow account. The agent reads schemas, models, API contracts, and forms to list PII, PHI, payment, financial, and secret fields. It then traces each field to the places it ends up, such as logs, analytics, error trackers, caches, third-party APIs, LLM prompts, embeddings, and vector stores. Each flow gets a severity and a minimization fix, and the result is a report that never contains the sensitive values themselves. The report also maps onto the data inventory worksheet in **plan-skyflow-implementation** for users who go on to plan a Skyflow integration. References to OWASP LLM risks are linked where they apply.
 
 ### Plan Skyflow Implementation
 

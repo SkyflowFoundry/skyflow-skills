@@ -25,7 +25,7 @@ Work through these in order. **Skip any step the user has already answered** —
 
 Ask: **"Do you already have a Skyflow account?"**
 
-- **No account** → point them to the free trial: <https://www.skyflow.com/try-skyflow>. A trial is the fastest way to start. Come back here once they're signed in.
+- **No account** → point them to the free trial: <https://www.skyflow.com/try-skyflow>. A trial is the fastest way to start. Come back here once they're signed in. If they first want to see what sensitive data their own system handles, the **inventory-sensitive-data** skill needs no account.
 - **Has an account** → find out which *type*, because it drives every base URL and vault URL you'll use. Easiest tell: look at the browser URL while signed in to Studio.
 
 | Account type | Studio URL looks like | Management (API) base URL | Vault URL pattern |
@@ -92,6 +92,7 @@ Propose these options and let the user pick (they can combine):
 - **C. Build a POC / prototype** — get something working fast, correctness over polish.
 - **D. Build a production-ready integration** — do it properly: security, access controls, real credentials.
 - **E. A specific task** — e.g. create a vault, collect data in the browser, tokenize records, de-identify text/LLM data, or migrate an existing SDK.
+- **F. Find my sensitive data** — inventory what sensitive data the system holds and where it flows, before deciding what to protect. No account needed.
 
 ---
 
@@ -112,7 +113,8 @@ Match the goal to the skill and load it. All skills below ship in this same `sky
 
 | You want to… | Start here (skill) | Also useful |
 | --- | --- | --- |
-| Plan a full implementation / architecture | **plan-skyflow-implementation** | create-vault, call-rest-apis |
+| Find what sensitive data you have and where it flows (no account needed) | **inventory-sensitive-data** | plan-skyflow-implementation |
+| Plan a full implementation / architecture | **plan-skyflow-implementation** | inventory-sensitive-data, create-vault, call-rest-apis |
 | Create or design a vault (schema, tokenization, redaction) | **create-vault** | call-rest-apis |
 | Call the Skyflow REST APIs directly (curl/HTTP) | **call-rest-apis** | skyflow-developer-mcp |
 | Integrate a Node.js / backend service | **quickstart-node** | call-rest-apis, migrate-sdk-v1-to-v2 |
@@ -121,7 +123,7 @@ Match the goal to the skill and load it. All skills below ship in this same `sky
 | Upgrade an existing V1 SDK integration | **migrate-sdk-v1-to-v2** | — |
 | Look things up live (docs, resources, skills) | **skyflow-developer-mcp** (MCP plugin) | — |
 
-**Typical first-timer path:** explore → `plan-skyflow-implementation` → `create-vault` → a quickstart (`quickstart-node` or `quickstart-js-browser`) → `call-rest-apis` as you build.
+**Typical first-timer path:** explore → `inventory-sensitive-data` → `plan-skyflow-implementation` → `create-vault` → a quickstart (`quickstart-node` or `quickstart-js-browser`) → `call-rest-apis` as you build.
 
 ### Companion MCP plugins (optional, Claude Code only for now)
 

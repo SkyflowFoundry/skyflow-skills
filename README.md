@@ -3,7 +3,7 @@
 > [!WARNING]
 > This is an experimental project in development. This project is not supported and offered under an MIT license.
 
-Skyflow's **skills** for AI agents — guided workflows for getting started, vault creation, REST API guidance, SDK migration, implementation planning, and SDK quickstarts.
+Skyflow's **skills** for AI agents — guided workflows for sensitive data inventory, getting started, vault creation, REST API guidance, SDK migration, implementation planning, and SDK quickstarts.
 
 The skills follow the open [Agent Skills](https://agentskills.io/specification) format, and the plugin ships manifests for several agent hosts from one source of truth.
 
@@ -25,7 +25,7 @@ This repo contains **skills only**. It ships no MCP servers, opens no network co
 
 | Plugin | What it does | Environment variables | Docs |
 | ------ | ------------ | --------------------- | ---- |
-| `skyflow-skills` | Guided Skyflow workflows (getting started, vault creation, REST API guidance, SDK migration, implementation planning, SDK quickstarts) | None | [README](skyflow-skills-plugin/README.md) |
+| `skyflow-skills` | Guided Skyflow workflows (sensitive data inventory, getting started, vault creation, REST API guidance, SDK migration, implementation planning, SDK quickstarts) | None | [README](skyflow-skills-plugin/README.md) |
 
 ## Supported hosts
 
@@ -98,7 +98,7 @@ curl -L -O https://github.com/SkyflowFoundry/skyflow-skills/releases/latest/down
 unzip create-vault.zip -d ~/.claude/skills/
 ```
 
-Available skills: `call-rest-apis`, `create-vault`, `get-started`, `migrate-sdk-v1-to-v2`, `plan-skyflow-implementation`, `quickstart-js-browser`, `quickstart-node`. A `SHA256SUMS.txt` is attached to each release so you can verify downloads.
+Available skills: `call-rest-apis`, `create-vault`, `get-started`, `inventory-sensitive-data`, `migrate-sdk-v1-to-v2`, `plan-skyflow-implementation`, `quickstart-js-browser`, `quickstart-node`. A `SHA256SUMS.txt` is attached to each release so you can verify downloads.
 
 > These zips are build artifacts generated from the same skills in this repo — the plugin and the standalone downloads are always in sync.
 
